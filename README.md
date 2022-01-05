@@ -95,7 +95,8 @@ Table of contents
 - [**Installation of PDSH**](#installation-of-pdsh)
 - [**Setup NFS**](#setup-nfs)
 - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
-- [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
+  - [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
+- [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc-1)
 - [**Installation of MPI**](#installation-of-mpi)
 - [**Compiling Linpack**](#compiling-linpack)
 - [**Benchmarking**](#benchmarking)
@@ -932,16 +933,16 @@ Coming back to home directory
 ```console
 cd
 ```
-<<<<<<< HEAD
+
 **Command:** 
 ```console
 vi /etc/exports/
 ```
-=======
+
 
 **Command:** vi /etc/exports/
 
->>>>>>> fc0df95f2ad3783f3ac662ecf619b0b82eb04e40
+
 Add
 
 /cluster \*(rw,no\_root\_squash,sync)
@@ -1155,20 +1156,20 @@ Hostnames of each node must be visible by these commands.
 
 Now check hostnames by PDSH
 
-<<<<<<< HEAD
+
 **Command:** 
 ```console
 pdsh -a hostname
 ```
 ## **Installation of prerequisites packages (GCC, G77, etc)**
-=======
+
 **Command:** pdsh -a hostname
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 #
 # **Installation of prerequisites packages (GCC, G77, etc)**
->>>>>>> bfd99e2738f025b488e54fa66f9701ceb1b37723
+
 
 Check if all nodes have GCC or not
 
@@ -1847,8 +1848,10 @@ Now execute hpl programe and send output to textfile
 mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
 ```
 
-**Command:** mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
-
+**Command:** 
+```console
+mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
+```
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
@@ -1862,15 +1865,14 @@ mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-<<<<<<< HEAD
+
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
 
-=======
 [linkedin-url-mustafa]: https://linkedin.com/in/syedmustafaimam
 [linkedin-url-elliott]: https://www.linkedin.com/in/elliott-joseph-6436411ab/
 [linkedin-url-hirdesh]: https://www.linkedin.com/in/hirdeshkumar2407/
 [linkedin-url-hurrar]: https://www.linkedin.com/in/syedhurrarhasanrizvi/
 
 [product-screenshot]: images/screenshot.png
->>>>>>> bfd99e2738f025b488e54fa66f9701ceb1b37723
+
