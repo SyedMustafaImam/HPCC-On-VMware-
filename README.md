@@ -1,7 +1,7 @@
 <div align="right">
 
 
-<p style='color:#FAF9F6;font-size:32px; font-weight:bold'>Parallel &amp; Distributed Computing </p>
+<p style='color:#FAF9F6;font-size:32px; font-weight:bold'> Parallel &amp; Distributed Computing </p>
 
 
 <p style='color:#FAF9F6;font-size:32px; font-weight:bold'>Final Project</p>
@@ -28,7 +28,6 @@ Date: 23-12-2021
 </p>
 
 </div> 
-
 <p style='color:white;font-size:28px;font-weight:bold'>
 Table of contents 
 </p>
@@ -133,80 +132,115 @@ Let your system boot up. So this is how you would install Linux.
 
 On a virtual machine now we&#39;ve two more nodes to go on which we need to install the Linux operating system. Once I&#39;m happy with the configuration of the system, we will copy the files from the backend. This is because we have here this version of VMware server that does not support cloning. So what we will be doing is shutting down this server/system/VM, and now copying its file disk file. As your server is turned off, let&#39;s go to the backend.
 
-**Command:** cd machines
+**Command:** 
+```console
+cd machines
+```
 
-**Command:** ls
-
+**Command:** 
+```console
+ls
+```
 And we have this HPC master directory, which we have these files.
 
 Let&#39;s enter into this directory by
 
-**Command:** cd HPCMaster
-
-**Command:** ls
-
-**Command:** ls -lh
-
+**Command:** 
+```console
+cd HPCMaster
+```
+**Command:** 
+```console
+ls
+```
+**Command:** 
+```console
+ls -lh
+```
 As you can see, this is your virtual machine disk file named **HPCMaster.vmdk** , which consumes 1.6 GB.
 
 So now I&#39;m copying this file.
 
-**Command:** ls ../Pictures/HPCNode1/
-
-**Command:** ls ../Pictures/HPCNode1/ -lh
-
+**Command:** 
+```console
+ls ../Pictures/HPCNode1/
+```
+**Command:** 
+```console
+ls ../Pictures/HPCNode1/ -lh
+```
 As you can see you have four files there. Now we will copy this VMDK file from here and overwrite this VMDK file here.
 
-**Command:** cp HPCMaster.vmdk ../Pictures/HPCNode1/HPCNode1.vmdk
-
+**Command:** 
+```console
+cp HPCMaster.vmdk ../Pictures/HPCNode1/HPCNode1.vmdk
+```
 Press y for yes overwriting.
 
 As you can see the file is copied so let&#39;s check the list.
 
-**Command:** ls ../Pictures/HPCNode1/ -lh
-
+**Command:** 
+```console
+ls ../Pictures/HPCNode1/ -lh
+```
 Let&#39;s try starting node1 and see what happens. Click power on and go to the console window and let it boot up. It will have all settings from your HPC master. That means it will also have the same hostname, same IP everything.
 
 Once this is booted up. So let&#39;s go to the console, it will seem like a master node, but it is not it is, as you can see here, this is **HPCNode1** and in the same way, we&#39;ll do the second node as well. But first, adjust the hostnames.
 
-**Command:** vi /etc/sysconfig/network
-
+**Command:** 
+```console
+vi /etc/sysconfig/network
+```
 Then edit hostname as **Node1**
 
 And the IP is going to be
 
-**Command:** vi /etc/sysconfig/network-scripts/ifcfg-eth0
-
+**Command:** 
+```console
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+```
 Life config Ethernet zero should not get its IP from DHCP. It&#39;s going to be a static IP address equal to 10.0.0.11 and netmask is equal to 255.255.255.0
 
 One more thing to see hosts.
 
-**Command:** vi /etc/hosts
-
+**Command:** 
+```console
+vi /etc/hosts
+```
 remove this master node at all from the script.
 
 Now let&#39;s change the hostname manually.
 
-**Command:** hostname node1
-
-**Command:** service syslog restart
-
-**Command:** less /var/log/messages
-
+**Command:** 
+```console
+hostname node1
+```
+**Command:** 
+```console
+service syslog restart
+```
+**Command:** 
+```console
+less /var/log/messages
+```
 That will make sure that the logs in the various log messages are written correctly.
 
 Press **shift G** you can see as soon as you&#39;ve restarted Syslog the logs here it says node1 now before it was master node.
 
 Then reboot this system
 
-**Command:** reboot
-
+**Command:** 
+```console
+reboot
+```
 Now repeat the same process for Node2 as you have done for the Node1.
 
 ## **Configuring etc host file**
 
-**Command:** vi /etc/hosts
-
+**Command:** 
+```console
+vi /etc/hosts
+```
 Now delete IP version 6 naming file
 
 Then remove a master node from this localhost line
@@ -694,8 +728,10 @@ Coming back to home directory
 ```console
 cd
 ```
-**Command:** vi /etc/exports/
-
+**Command:** 
+```console
+vi /etc/exports/
+```
 Add
 
 /cluster \*(rw,no\_root\_squash,sync)
@@ -704,50 +740,70 @@ Save and exit
 
 Restart NFS service
 
-**Command:** service nfs restart
-
+**Command:** 
+```console
+service nfs restart
+```
 Check Configuration
 
-**Command:** chkconfig –level 35 nfs on
-
+**Command:** 
+```console
+chkconfig –level 35 nfs on
+```
 Make a directory
 
-**Command:** mkdir /cluster
-
+**Command:** 
+```console
+mkdir /cluster
+```
 Again restart service
 
-**Command:** service nfs restart
-
+**Command:** 
+```console
+service nfs restart
+```
 Now we have to create this directory on all nodes so we will just use pdsh to create on all nodes at once
 
-**Command:** pdsh -w node1,node2 mkdir /cluster
-
+**Command:** 
+```console
+pdsh -w node1,node2 mkdir /cluster
+```
 Now mounting
 
-**Command:** df -hT
-
+**Command:** 
+```console
+df -hT
+```
 Execute this command on node1
 
-**Command:** mount -t nfs masternode:/cluster /cluster/
-
+**Command:** 
+```console
+mount -t nfs masternode:/cluster /cluster/
+```
 Execute this command on node2
 
-**Command:** mount -t nfs masternode:/cluster /cluster/
-
+**Command:** 
+```console
+mount -t nfs masternode:/cluster /cluster/
+```
 Now you can see that it is written that you have mounted it from the masternode.
 
 **Now specify etc/fstab on node1**
 
-**Command:** vi /etc/fstab
-
+**Command:** 
+```console
+vi /etc/fstab
+```
 Add this line
 
 masternode:/cluster /cluster nfs defaults 0 0
 
 **Now specify etc/fstab on node2**
 
-**Command:** vi /etc/fstab
-
+**Command:** 
+```console
+vi /etc/fstab
+```
 Add this line
 
 masternode:/cluster /cluster nfs defaults 0 0
@@ -764,112 +820,166 @@ The home directory will be /cluster/mpiuser
 
 Now coming back to the masternode.
 
-**Command:** groupadd -g 600 mpigroup
-
-**Command:** useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
-
+**Command:**
+```console
+ groupadd -g 600 mpigroup
+```
+**Command:** 
+```console
+useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
+```
 This directory is now created.
 
 Now add group and users on node1 and node2
 
 Run these commands on each node separately
 
-**Command:** groupadd -g 600 mpigroup
-
-**Command:** useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
-
+**Command:**
+```console 
+groupadd -g 600 mpigroup
+```
+**Command:** 
+```console
+useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
+```
 Our users and groups are now created on all nodes.
 
 Now we are doing user equivalence
 
-**Command:** su - mpiuser
-
+**Command:** 
+```console
+su - mpiuser
+```
 Generate its sshkeys as well
 
-**Command:** ssh-keygen -t dsa
-
+**Command:** 
+```console
+ssh-keygen -t dsa
+```
 Press enter no need to enter paraphrase
 
-**Command:** ssh-keygen -t rsa
-
+**Command:** 
+```console
+ssh-keygen -t rsa
+```
 Press enter no need to enter paraphrase
 
 As two key pairs are generated
 
 Now,
 
-**Command:** ls /cluster
-
+**Command:** 
+```console
+ls /cluster
+```
 Switch to mpiuser
 
-**Command:** su - mpiuser
-
-**Command:** ls -l
-
+**Command:** 
+```console
+su - mpiuser
+```
+**Command:** 
+```console
+ls -l
+```
 Check all the files here
 
-**Command:** ls -la
-
+**Command:** 
+```console
+ls -la
+```
 Now changing directory
 
-**Command:** cd .ssh/
-
-**Command:** ls -la
-
+**Command:** 
+```console
+cd .ssh/
+```
+**Command:** 
+```console
+ls -la
+```
 Remember /cluster directory is shared across all nodes.
 
 Append the public keys into the authorized keys file
 
-**Command:** cat \*.pub \&gt;\&gt; authorized\_keys
-
-**Command:** cd ..
-
+**Command:** 
+```console
+cat \*.pub \&gt;\&gt; authorized\_keys
+```
+**Command:** 
+```console
+cd ..
+```
 Now try to command as a mpiuser on all nodes
 
-**Command:** ssh masternode uptime
-
-**Command:** ssh node1 uptime
-
-**Command:** ssh node2 uptime
-
+**Command:** 
+```console
+ssh masternode uptime
+```
+**Command:** 
+```console
+ssh node1 uptime
+```
+**Command:** 
+```console
+ssh node2 uptime
+```
 Check hostname by ssh command
 
-**Command:** ssh masternode hostname
-
-**Command:** ssh node1 hostname
-
-**Command:** ssh node2 hostname
-
+**Command:** 
+```console
+ssh masternode hostname
+```
+**Command:** 
+```console
+ssh node1 hostname
+```
+**Command:** 
+```console
+ssh node2 hostname
+```
 Hostnames of each node must be visible by these commands.
 
 Now check hostnames by PDSH
 
-**Command:** pdsh -a hostname
-
+**Command:** 
+```console
+pdsh -a hostname
+```
 ## **Installation of prerequisites packages (GCC, G77, etc)**
 
 Check if all nodes have GCC or not
 
-**Command:** rpm -q GCC
-
+**Command:** 
+```console
+rpm -q GCC
+```
 The version of GCC will be visible
 
-**Command:** rpm -qa | grep g77
-
+**Command:** 
+```console
+rpm -qa | grep g77
+```
 If not shown by this command you can run
 
-**Command:** yum list | grep g77
-
+**Command:** 
+```console
+yum list | grep g77
+```
 If g77 exists this will be visible there.
 
 Install g77 on masternode
 
-**Command:** yum -y install compat-gcc-34-g77
-
+**Command:** 
+```console
+yum -y install compat-gcc-34-g77
+```
 Installing g77 on node1 and node2 from masternode
 
-**Command:** pdsh -w node1,node2 yum -y install compat-gcc-34-g77
-
+**Command:** 
+```console
+pdsh -w node1,node2 yum -y install compat-gcc-34-g77
+```
 All prerequisites are now installed.
 
 ## **Installation of MPI**
@@ -878,74 +988,108 @@ Now, we go for MPI installation.
 
 So, MPI is basically Message Passing Interface is the language that is used to run a program specially designed program on multiple compute nodes on multiple nodes. MPI can be downloaded from various places there is open MPI this there are other MPI as well. I&#39;m going to download it from the web.
 
-**Command:** scp root@10.0.0.2:/root/mpi\* .
-
+**Command:** 
+```console
+scp root@10.0.0.2:/root/mpi\* .
+```
 Press yes
 
 Enter password redhat
 
 Mpi is downloaded in the home directory
 
-**Command:** ls -lh
-
+**Command:** 
+```console
+ls -lh
+```
 The file is not owned by mpiuser
 
-**Command:** chown mpiuser:mpigroup /cluster -R
-
+**Command:** 
+```console
+chown mpiuser:mpigroup /cluster -R
+```
 Access is now given to mpiuser
 
 Switch user to mpiuser
 
-**Command:** su - mpiuser
-
+**Command:** 
+```console
+su - mpiuser
+```
 Moving mpi
 
-**Command:** mv mpich2-1.0.8.tar.gz ..
-
-**Command:** ls
-
-**Command:** cd ..
-
-**Command:** ls -lh
-
+**Command:** 
+```console
+mv mpich2-1.0.8.tar.gz ..
+```
+**Command:** 
+```console
+ls
+```
+**Command:** 
+```console
+cd ..
+```
+**Command:** 
+```console
+ls -lh
+```
 As you can see it is nowhere.
 
 Now uncompressing
 
-**Command:** tar xzf mpich2-1.0.8.tar.gz
-
-**Command:** ls
-
-**Command:** cd mpich2-1.0.8
-
-**Command:** ls
-
+**Command:** 
+```console
+tar xzf mpich2-1.0.8.tar.gz
+```
+**Command:** 
+```console
+ls
+```
+**Command:** 
+```console
+cd mpich2-1.0.8
+```
+**Command:** 
+```console
+ls
+```
 There are so many files we are now configuring.
 
 This will be a new directory.
 
-**Command:**./Pictures/configure –prefix=/cluster/mpich2
-
+**Command:**
+```console
+./Pictures/configure –prefix=/cluster/mpich2
+```
 All the parts which were left during the installation will be installed by this command.
 
-**Command:** make
-
+**Command:** 
+```console
+make
+```
 Now the files will move to /cluster directory
 
-**Command:** make install
-
+**Command:** 
+```console
+make install
+```
 next, I&#39;m going to set up some environment variables in the MPI user&#39;s bash\_profile.
 
 First goto home directory
 
-**Command:** cd
-
-**Command:** vi .bash\_profile
-
+**Command:** 
+```console
+cd
+```
+**Command:** 
+```console
+vi .bash\_profile
+```
 Add these lines there
-
-PATH =$PATH:$HOME/bin:/cluster/mpich2/bin
-
+```console
+$PATH:$HOME/bin:/cluster/mpich2/bin
+```
 LD\_LIBRARY\_PATH=$LD\_LIBRARY\_PATH:/cluster/mpich2/lib
 
 export PATH
@@ -954,30 +1098,40 @@ export LD\_LIBRARY\_PATH
 
 If you don&#39;t want to logout
 
-**Command:** source .bash\_profile
-
+**Command:** 
+```console
+source .bash\_profile
+```
 This will load the new values
 
 You can also verify by the echo command
 
-**Command:** echo $PATH
-
+**Command:** 
+```console
+echo $PATH
+```
 Check if it is able to find MPD
 
-**Command:** which mpd
-
+**Command:** 
+```console
+which mpd
+```
 Check if it is able to find mpiexec
 
 Command: which mpiexec
 
 Check if it is able to find mpirun
 
-**Command:** which mpirun
-
+**Command:** 
+```console
+which mpirun
+```
 Create an mpd.host file
 
-**Command:** cat \&gt;\&gt; /cluster/mpiuser/mpd.hosts \&lt;\&lt; EOF
-
+**Command:** 
+```console
+cat \&gt;\&gt; /cluster/mpiuser/mpd.hosts \&lt;\&lt; EOF
+```
 **\&gt;** masternode
 
 **\&gt;** node1
@@ -988,18 +1142,24 @@ Create an mpd.host file
 
 Check the names here of all nodes
 
-**Command:** cat \&gt;\&gt; /cluster/mpiuser/mpd.hosts
-
+**Command:** 
+```console
+cat \&gt;\&gt; /cluster/mpiuser/mpd.hosts
+```
 If you don&#39;t want your masternode to take part in any kind of computation follow the command below.
 
-**Command:** vi /cluster/mpiuser/mpd.hostfile
-
+**Command:** 
+```console
+vi /cluster/mpiuser/mpd.hostfile
+```
 Remove masternode from here and exit
 
 Now creating secret files
 
-**Command:** vi /cluster/mpiuser/.mpd.conf
-
+**Command:** 
+```console
+vi /cluster/mpiuser/.mpd.conf
+```
 Add this line
 
 secretword=redhat
@@ -1008,36 +1168,54 @@ Save and exit
 
 Boot mpt on compute nodes
 
-**Command:** mpd &amp;
-
+**Command:** 
+```console
+mpd &amp;
+```
 If it has permission issue follow below command
 
-**Command:** chmod 0600 /cluster/mpiuser/.mpd.conf
-
-**Command:** ps aux | grep mpd
-
+**Command:** 
+```console
+chmod 0600 /cluster/mpiuser/.mpd.conf
+```
+**Command:** 
+```console
+ps aux | grep mpd
+```
 Now again Booting mpt on compute nodes
 
-**Command:** mpd &amp;
-
+**Command:** 
+```console
+mpd &amp;
+```
 Checking if it&#39;s running
 
-**Command:** mpdtrace -l
-
+**Command:** 
+```console
+mpdtrace -l
+```
 Exit all
 
-**Command:** mpdallexit
-
-**Command:** mpdboot -n 2 --chkuponly
-
+**Command:** 
+```console
+mpdallexit
+```
+**Command:** 
+```console
+mpdboot -n 2 --chkuponly
+```
 Now you can see 2 hosts are up
 
-**Command:** ps aux | grep mpd
-
+**Command:** 
+```console
+ps aux | grep mpd
+```
 Now edit this file
 
-**Command:** vi /cluster/mpiuser/mpd.hosts
-
+**Command:** 
+```console
+vi /cluster/mpiuser/mpd.hosts
+```
 Add this line
 
 Masternode
@@ -1046,48 +1224,72 @@ Save and exit
 
 Checking how many servers are up
 
-**Command:** mpdboot -n 3 --chkuponly
-
+**Command:** 
+```console
+mpdboot -n 3 --chkuponly
+```
 Now you can see 3 hosts are up
 
-**Command:** mpdboot -n 3
-
-**Command:** mpdtrace
-
+**Command:** 
+```console
+mpdboot -n 3
+```
+**Command:** 
+```console
+mpdtrace
+```
 Now exit from all
 
-**Command:** mpdexitall
-
+**Command:** 
+```console
+mpdexitall
+```
 Now check if I am traced or not
 
-**Command:** mpdtrace
-
+**Command:** 
+```console
+mpdtrace
+```
 Run each command separately and see the time difference
 
-**Command:** mpiexec -n 1 ./Pictures/cpi
-
+**Command:** 
+```console
+mpiexec -n 1 ./Pictures/cpi
+```
 As you can see execution time
 
-**Command:** mpiexec -n 2 ./Pictures/cpi
-
-**Command:** mpiexec -n 3 ./Pictures/cpi
-
+**Command:** 
+```console
+mpiexec -n 2 ./Pictures/cpi
+```
+**Command:**
+```console
+mpiexec -n 3 ./Pictures/cpi
+```
 Compiling a program
 
-**Command:** mpicc -o icpi icpic.c
-
-**Command:** ls
-
+**Command:** 
+```console
+mpicc -o icpi icpic.c
+```
+**Command:** 
+```console
+ls
+```
 It&#39;s compiled.
 
-**Command:** mpiexec -n 1 ./Pictures/icpi
-
+**Command:** 
+```console
+mpiexec -n 1 ./Pictures/icpi
+```
 Enter any large random number and see the execution time.
 
 Now run this using 2 nodes
 
-**Command:** mpiexec -n 1 ./Pictures/icpi
-
+**Command:** 
+```console
+mpiexec -n 1 ./Pictures/icpi
+```
 Enter the same number and see the execution time difference.
 
 On virtual machines, it might give higher time but in physical servers, it will be okay sometimes it gets problematic in VM&#39;s.
@@ -1101,50 +1303,78 @@ For linpack, you would need a BLAS library.
 
 Check if it already exists or not
 
-**Command:** cd
-
-**Command:** ls
-
-**Command:** scp 10.0.0.2:/root/G\* .
-
+**Command:** 
+```console
+cd
+```
+**Command:** 
+```console
+ls
+```
+**Command:** 
+```console
+scp 10.0.0.2:/root/G\* .
+```
 Enter root password
 
 Copy file
 
-**Command:** cp /cluster/mpiuser/
-
-**Command:** cp GotoBLAS-1.26.tar.gz /cluster/mpiuser/
-
+**Command:** 
+```console
+cp /cluster/mpiuser/
+```
+**Command:** 
+```console
+cp GotoBLAS-1.26.tar.gz /cluster/mpiuser/
+```
 Switching user
 
-**Command:** su - mpiuser
-
-**Command:** ls
-
+**Command:** 
+```console
+su - mpiuser
+```
+**Command:** 
+```console
+ls
+```
 Uncompressing
 
-**Command:** tar xzf GotoBLAS-1.26.tar.gz
-
+**Command:** 
+```console
+tar xzf GotoBLAS-1.26.tar.gz
+```
 It will create a directory here
 
-**Command:** ls -l
-
+**Command:** 
+```console
+ls -l
+```
 As it is seen, a directory is created.
 
 BLAS is a linear algebra library
 
-**Command:** ls
-
-**Command:** vi Makefile.rule
-
+**Command:** 
+```console
+ls
+```
+**Command:** 
+```console
+vi Makefile.rule
+```
 It has this online 16. As you can see here, this Fortran compiler is g 77. Some of the documentation or guides will tell you to uncomment this. But I&#39;ll tell you not to because I&#39;m exiting without let&#39;s undo, exit without changes. The reason is simple: official documentation tells us that it will use G 77 If it does not find Fortran 77. So, if g 77 is going to be used anywhere, don&#39;t waste time going into this file and editing it. What you want to do now is you are going to compile it.
 
-**Command:**./Pictures/quickbuild.
-
-**Command:**./Pictures/quickbuild.32bit
-
-**Command:** make
-
+**Command:**
+```console
+./Pictures/quickbuild.
+```
+**Command:**
+```console
+./Pictures/quickbuild.32bit
+```
+**Command:** 
+```console
+make
+```
 It is compiled now.
 
 Now you would need to download a high-performance linpack.
@@ -1153,58 +1383,93 @@ You can download it from [www.netlib.org/benchmark/hpl](http://www.netlib.org/be
 
 I am copying it from my host machine
 
-**Command:** scp root@10.0.0.2:/root/hpl\* .
-
+**Command:** 
+```console
+scp root@10.0.0.2:/root/hpl\* .
+```
 Enter password redhat
 
 Check now if the file is here
 
-**Command:** ls
-
+**Command:** 
+```console
+ls
+```
 The file is in the home directory of this mpiuser.
 
 Extract or uncompress
 
-**Command:** tar xzf hpl.tgz
+**Command:** 
+```console
+tar xzf hpl.tgz
+```
+**Command:** 
+```console
+ls
+```
 
-**Command:** ls
 
-**Command:** cd hpl.tgz
-
-**Command:** cd hpl
-
-**Command:** ls
+**Command:** 
+```console
+cd hpl.tgz
+```
+**Command:** 
+```console
+cd hpl
+```
+**Command:** 
+```console
+ls
+```
 
 Copying setup
 
-**Command:** cp setup/
-
-**Command:** cp setup/Make.Linux\_pII\_FBLAS\_gm .
-
+**Command:** 
+```console
+cp setup/
+```
+**Command:** 
+```console
+cp setup/Make.Linux\_pII\_FBLAS\_gm .
+```
 Copying to the current location
 
 Check your GCC version
 
-**Command:** gcc -v
-
-**Command:** ls /usr/lib/
-
+**Command:** 
+```console
+gcc -v
+```
+**Command:** 
+```console
+ls /usr/lib/
+```
 Press yes
 
-**Command:** ls /usr/lib/gcc
-
-**Command:** ls /usr/lib/gcc/i386-redhat-linux/
-
+**Command:** 
+```console
+ls /usr/lib/gcc
+```
+**Command:** 
+```console
+ls /usr/lib/gcc/i386-redhat-linux/
+```
 Select version
 
-**Command:** ls /usr/lib/gcc/i386-redhat-linux/4.1.2/
-
+**Command:** 
+```console
+ls /usr/lib/gcc/i386-redhat-linux/4.1.2/
+```
 Check current location
 
-**Command:** pwd
-
-**Command:** vi Make.Linux\_PII\_FBLAS\_gm
-
+**Command:** 
+```console
+pwd
+```
+**Command:** 
+```console
+vi Make.Linux\_PII\_FBLAS\_gm
+```
 Change LA Directory in this file to
 
 **$** (HOME) / GotoBLAS
@@ -1227,40 +1492,56 @@ Save and exit
 
 Now build this
 
-**Command:** make arch=Linux\_PII\_FBLAS\_gm
-
+**Command:** 
+```console
+make arch=Linux\_PII\_FBLAS\_gm
+```
 Moving to this directory
 
-**Command:** ls /cluster/mpiuser/hpl/bin/Linux\_PII\_FBLAS\_gm/
-
+**Command:** 
+```console
+ls /cluster/mpiuser/hpl/bin/Linux\_PII\_FBLAS\_gm/
+```
 List here
 
-**Command:** ls
-
+**Command:** 
+```console
+ls
+```
 Copy HPL.dat
 
-**Command:** cp HPL.dat HPL.dat.orig
-
-**Command:** vi HPL.dat
-
+**Command:** 
+```console
+cp HPL.dat HPL.dat.orig
+```
+**Command:** 
+```console
+vi HPL.dat
+```
 Now the linpack configuration file has appeared.
 
 value from size can be found first, by
 
-**Command:** free -b
-
+**Command:** 
+```console
+free -b
+```
 Go to calculator
 
-**Command:** bc
-
+**Command:** 
+```console
+bc
+```
 Sqrt (.1\*(value of the output of your free b) \* 2)
 
 5997.8 approx 6000
 
 Now edit this file
 
-**Command:** vi HPL.dat
-
+**Command:** 
+```console
+vi HPL.dat
+```
 Edit No of problem to 1
 
 Size 6000
@@ -1279,40 +1560,57 @@ Save and exit
 
 First exit
 
-**Command:** mpdallexit
-
+**Command:** 
+```console
+mpdallexit
+```
 Boot again:
 
-**Command:** mpdboot -n 2
-
+**Command:** 
+```console
+mpdboot -n 2
+```
 It is not reading mpd.host file
 
 Goto cd
 
-**Command:** cd
-
+**Command:** 
+```console
+cd
+```
 Boot again:
 
-**Command:** mpdboot -n 2
-
+**Command:** 
+```console
+mpdboot -n 2
+```
 It&#39;s booted.
 
 Going to the previous directory
 
-**Command:** cd -
-
+**Command:** 
+```console
+cd -
+```
 Check current directory
 
-**Command:** pwd
-
+**Command:** 
+```console
+pwd
+```
 Now execute hpl program
 
-**Command:** mpiexec -n 2 ./Pictures/xhpl
-
+**Command:** 
+```console
+mpiexec -n 2 ./Pictures/xhpl
+```
 This is our benchmarking being done. This might take some time.
 
 You can see complete passing and failing reports at the end of the benchmarking process.
 
 Now execute hpl programe and send output to textfile
 
-**Command:** mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
+**Command:** 
+```console
+mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
+```
