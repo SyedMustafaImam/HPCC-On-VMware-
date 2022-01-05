@@ -1006,7 +1006,7 @@ masternode:/cluster /cluster  nfs defaults  0 0
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]# vi /etc/fstab
+[root@node2 ]# vi /etc/fstab
 ```
 
 Add this line
