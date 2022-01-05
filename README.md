@@ -863,7 +863,7 @@ What does pdsh do? If you want to perform a certain operation on all the nodes, 
 **Command:**
 
 ```console
-vi /etc/machines
+[root@masternode i386]# vi /etc/machines
 ```
 
 Add these three lines
@@ -883,7 +883,7 @@ What executes what let&#39;s say date, is simple.
 **Command:**
 
 ```console
-pdsh -a date
+[root@masternode i386]# pdsh -a date
 ```
 
 It went out on all the nodes and it brought the output back from all the notes you see it they&#39;re all 100% At the same time that&#39;s not the because of PDSH because of NTP which we just set up you Just go to masternode and enter.
@@ -891,7 +891,7 @@ It went out on all the nodes and it brought the output back from all the notes y
 **Command:**
 
 ```console
-pdsh -a ntpq -p -n
+[root@masternode i386]# pdsh -a ntpq -p -n
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
