@@ -10,7 +10,7 @@
 
 
 
-[![Contributors][contributors-shield]][contributors-url]
+[![x][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -25,6 +25,13 @@
   <a href="https://github.com/SyedMustafaImam/HPCC-On-VMware-">
     <img src="Pictures/logo.png" alt="Logo" >
   </a>
+
+
+
+
+<div id="top"></div>
+
+
 <p style='font-size:32px; font-weight:bold'>Parallel &amp; Distributed Computing </p>
   <h3 align="center">HPC Cluster Configuration</h3>
 
@@ -69,56 +76,82 @@ Table of contents
 
 - [**1.Introduction**](#1introduction)
 - [**2.Use Cases**](#2use-cases)
-  - [**Research Labs**](#research-labs)
-  - [**Media And Entertainment**](#media-and-entertainment)
-  - [**Oil and gas**](#oil-and-gas)
-  - [**Artificial Intelligence**](#artificial-intelligence)
-  - [**Financial Services**](#financial-services)
+- [**Research Labs**](#research-labs)
+- [**Media And Entertainment**](#media-and-entertainment)
+- [**Oil and gas**](#oil-and-gas)
+- [**Artificial Intelligence**](#artificial-intelligence)
+- [**Financial Services**](#financial-services)
 - [**3.Steps:**](#3steps)
-  - [**Creation Of Virtual Machines**](#creation-of-virtual-machines)
-  - [**Linux Installation on nodes**](#linux-installation-on-nodes)
-  - [**Configuring etc host file**](#configuring-etc-host-file)
-  - [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
-  - [**Setup NTP Service**](#setup-ntp-service)
-  - [**Installation of PDSH**](#installation-of-pdsh)
-  - [**Setup NFS**](#setup-nfs)
-  - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
-  - [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
-  - [**Installation of MPI**](#installation-of-mpi)
-  - [**Compiling Linpack**](#compiling-linpack)
-  - [**Benchmarking**](#benchmarking)
+- [**Creation Of Virtual Machines**](#creation-of-virtual-machines)
+- [**Linux Installation on nodes**](#linux-installation-on-nodes)
+- [**Configuring etc host file**](#configuring-etc-host-file)
+- [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
+- [**Setup NTP Service**](#setup-ntp-service)
+- [**Installation of PDSH**](#installation-of-pdsh)
+- [**Setup NFS**](#setup-nfs)
+- [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
+- [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
+- [**Installation of MPI**](#installation-of-mpi)
+- [**Compiling Linpack**](#compiling-linpack)
+- [**Benchmarking**](#benchmarking)
+
+
 
 # **1.Introduction**
 
 An HPC cluster is a collection of hundreds or thousands of servers that are networked together, each server is known as a node. Each node in a cluster works in parallel with each other, boosting processing speed to deliver high-performance computing. HPC is appropriate for most small and medium-sized businesses since these nodes are very close together, this is the reason why it is called a cluster. All cluster nodes have the same components as a laptop or desktop such as the CPU, cores, memory, and disk space. The difference between personal computers and a cluster node is in quantity, quality, and power of the components. User login to the cluster head node is done by using the ssh program.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 # **2.Use Cases**
 
 An HPC is Deployed on-premises, at the edge, or in the cloud. HPC solutions are used for a variety of purposes across multiple industries.HPC is used to help scientists find sources of renewable energy, understand the evolution of our universe. Predict and track the storms, and create new materials.
 
-## **Research Labs**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Research Labs**
 
 HPC is used to help scientists find sources of renewable energy, understand the evolution of our universe, predict and track storms and create new materials.
 
-## **Media And Entertainment**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Media And Entertainment**
 
 HPC is used to edit feature films, render mind-blowing special effects, and stream live events around the world.
 
-## **Oil and gas**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Oil and gas**
 
 HPC is used to more accurately identify where to drill for new wells and to help boost production from existing wells.
 
-## **Artificial Intelligence**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Artificial Intelligence**
 
 HPC is used to detect credit card fraud, provide self-guided technical support, reach self-driving vehicles, and improve cancer screening techniques.
 
-## **Financial Services**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Financial Services**
 
 HPC is used to track real-time stock trends and automate trading.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 # **3.Steps:**
 
-## **Creation Of Virtual Machines**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Creation Of Virtual Machines**
 
 The master node is set up by the name &#39;HPC Master&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine and the network working on a bridge network. The System Configuration of the HPC Master is presented below:
 
@@ -136,7 +169,10 @@ An NTP server was also created by using a node that is not part computation perf
 
 ![ScreenShot](./Pictures/ntp.JPG)
 
-## **Linux Installation on nodes**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Linux Installation on nodes**
 
 After booting up from the image it will automatically go into the install mode.
 
@@ -232,7 +268,10 @@ Then reboot this system
 
 Now repeat the same process for Node2 as you have done for the Node1.
 
-## **Configuring etc host file**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Configuring etc host file**
 
 **Command:** vi /etc/hosts
 
@@ -270,7 +309,10 @@ Except for the fingerprint of node2, node2&#39;s password is redhat.
 
 Now, the, etc hosts file is configured.
 
-## **SSH equivalence establishment for user root**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **SSH equivalence establishment for user root**
 
 Now we will generate public and private keys (DSA and RSA) of all nodes.
 
@@ -494,7 +536,10 @@ ssh node2 uptime
 exit
 ```
 
-## **Setup NTP Service**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Setup NTP Service**
 
 **Setupping NTP service on node1.**
 
@@ -734,7 +779,10 @@ watch &quot;ntpq -p -n&quot;
 
 ##
 
-## **Installation of PDSH**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Installation of PDSH**
 
 Check if pdsh is downloaded on the host machine or not.
 
@@ -830,7 +878,10 @@ It went out on all the nodes and it brought the output back from all the notes y
 pdsh -a ntpq -p -n
 ```
 
-## **Setup NFS**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Setup NFS**
 
 Now setup nfs on masternode
 
@@ -900,7 +951,10 @@ Add this line
 
 masternode:/cluster /cluster nfs defaults 0 0
 
-## **Creation of ordinary user and also setup SSH equivalence**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Creation of ordinary user and also setup SSH equivalence**
 
 **Group:** mpigroup-600
 
@@ -994,7 +1048,10 @@ Now check hostnames by PDSH
 
 **Command:** pdsh -a hostname
 
-## **Installation of prerequisites packages (GCC, G77, etc)**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Installation of prerequisites packages (GCC, G77, etc)**
 
 Check if all nodes have GCC or not
 
@@ -1020,7 +1077,10 @@ Installing g77 on node1 and node2 from masternode
 
 All prerequisites are now installed.
 
-## **Installation of MPI**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Installation of MPI**
 
 Now, we go for MPI installation.
 
@@ -1243,7 +1303,10 @@ On virtual machines, it might give higher time but in physical servers, it will 
 
 Remember real hardware clusters will give much accuracy and proficiency.
 
-## **Compiling Linpack**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Compiling Linpack**
 
 For linpack, you would need a BLAS library.
 
@@ -1371,7 +1434,10 @@ Change Linker
 
 Save and exit
 
-## **Benchmarking**
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#
+# **Benchmarking**
 
 Now build this
 
