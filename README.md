@@ -15,7 +15,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 <br />
 <br />
@@ -43,18 +43,17 @@
 
 <p style='font-size:21.4px; font-weight:bold'>Project Report</p>
 <p style='font-size:15.1px; font-weight:bold'>Section: BSCS 7A</p>
+
 <p style='font-size:15.1px; font-weight:bold'>By</p>
 <p style='font-size:15.1px;'>
-Syed Hurrar Hasan Rizvi (1812135)</p>
-<p style='font-size:15.1px;'>
-Syed Mustafa Imam (1812134)
-</p>
-<p style='font-size:15.1px;'>
-Hirdesh Kumar (1812114)
-</p>
-<p style='font-size:15.1px;'>
-Elliott Francis Joseph (1812110)
-</p>
+
+[Syed Mustafa Imam][linkedin-url-mustafa]
+
+[Syed Hurrar Hassan Rizvi][linkedin-url-hurrar]
+
+[Elliott Franscis Joseph][linkedin-url-elliott]
+
+[Hirdesh Kumar][linkedin-url-hirdesh] 
 
 <br />
 
@@ -1479,5 +1478,9 @@ Now execute hpl programe and send output to textfile
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url-mustafa]: https://linkedin.com/in/syedmustafaimam
+[linkedin-url-elliott]: https://www.linkedin.com/in/elliott-joseph-6436411ab/
+[linkedin-url-hirdesh]: https://www.linkedin.com/in/hirdeshkumar2407/
+[linkedin-url-hurrar]: https://www.linkedin.com/in/syedhurrarhasanrizvi/
+
 [product-screenshot]: images/screenshot.png
