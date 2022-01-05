@@ -998,7 +998,7 @@ Now you can see that it is written that you have mounted it from the masternode.
 ```
 
 Add this line
-```bash
+```console
 masternode:/cluster /cluster  nfs defaults  0 0
 ```
 **Now specify etc/fstab on node2**
@@ -1006,12 +1006,14 @@ masternode:/cluster /cluster  nfs defaults  0 0
 **Command:**
 
 ```console
-vi /etc/fstab
+[root@node1 yum.repos.d]# vi /etc/fstab
 ```
 
 Add this line
 
+```console
 masternode:/cluster /cluster nfs defaults 0 0
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -1030,13 +1032,13 @@ Now coming back to the masternode.
 **Command:**
 
 ```console
- groupadd -g 600 mpigroup
+[root@masternode ~]# groupadd -g 600 mpigroup
 ```
 
 **Command:**
 
 ```console
-useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
+[root@masternode ~]# useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
 ```
 
 This directory is now created.
@@ -1048,23 +1050,27 @@ Run these commands on each node separately
 **Command:**
 
 ```console
-groupadd -g 600 mpigroup
+[root@node1 ~]# groupadd -g 600 mpigroup
 ```
-
+```console
+[root@node1 ~]# useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
+```
 **Command:**
 
 ```console
-useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
+[root@node2 ~]# groupadd -g 600 mpigroup
 ```
-
+```console
+[root@node2 ~]# useradd -u 600 -g 600 -d /cluster/mpiuser mpiuser
+```
 Our users and groups are now created on all nodes.
 
-Now we are doing user equivalence
+Now we are setting up SSH user equivalence for MPI to funciton properly.
 
 **Command:**
 
 ```console
-su - mpiuser
+[root@masternode ~]# su - mpiuser
 ```
 
 Generate its sshkeys as well
@@ -1072,7 +1078,7 @@ Generate its sshkeys as well
 **Command:**
 
 ```console
-ssh-keygen -t dsa
+[mpiuser@masternode ~]$ ssh-keygen -t dsa
 ```
 
 Press enter no need to enter paraphrase
@@ -1080,7 +1086,7 @@ Press enter no need to enter paraphrase
 **Command:**
 
 ```console
-ssh-keygen -t rsa
+[mpiuser@masternode ~]$ ssh-keygen -t rsa
 ```
 
 Press enter no need to enter paraphrase
@@ -1092,21 +1098,21 @@ Now,
 **Command:**
 
 ```console
-ls /cluster
+[mpiuser@masternode ~]$ ls /cluster/
 ```
 
-Switch to mpiuser
+Switch to mpiuser from node1
 
 **Command:**
 
 ```console
-su - mpiuser
+[root@node1 ~]# su - mpiuser
 ```
 
 **Command:**
 
 ```console
-ls -l
+[mpiuser@node1 ~]$ ls -l
 ```
 
 Check all the files here
@@ -1114,7 +1120,7 @@ Check all the files here
 **Command:**
 
 ```console
-ls -la
+[mpiuser@node1 ~]$ ls -la
 ```
 
 Now changing directory
@@ -1122,13 +1128,13 @@ Now changing directory
 **Command:**
 
 ```console
-cd .ssh/
+[mpiuser@node1 ~]$ cd .ssh/
 ```
 
 **Command:**
 
 ```console
-ls -la
+[mpiuser@node1 .ssh]$ ls -la
 ```
 
 Remember /cluster directory is shared across all nodes.
@@ -1138,13 +1144,13 @@ Append the public keys into the authorized keys file
 **Command:**
 
 ```console
-cat \*.pub \&gt;\&gt; authorized\_keys
+[mpiuser@masternode .ssh]$ cat *.pub >> authorized_keys
 ```
 
 **Command:**
 
 ```console
-cd ..
+[mpiuser@masternode .ssh]$ cd ..
 ```
 
 Now try to command as a mpiuser on all nodes
@@ -1152,19 +1158,19 @@ Now try to command as a mpiuser on all nodes
 **Command:**
 
 ```console
-ssh masternode uptime
+[mpiuser@masternode ~]$ ssh masternode uptime
 ```
 
 **Command:**
 
 ```console
-ssh node1 uptime
+[mpiuser@masternode ~]$ ssh node1 uptime
 ```
 
 **Command:**
 
 ```console
-ssh node2 uptime
+[mpiuser@masternode ~]$ ssh node2 uptime
 ```
 
 Check hostname by ssh command
@@ -1172,19 +1178,19 @@ Check hostname by ssh command
 **Command:**
 
 ```console
-ssh masternode hostname
+[mpiuser@masternode ~]$ ssh masternode hostname
 ```
 
 **Command:**
 
 ```console
-ssh node1 hostname
+[mpiuser@masternode ~]$ ssh node1 hostname
 ```
 
 **Command:**
 
 ```console
-ssh node2 hostname
+[mpiuser@masternode ~]$ ssh node2 hostname
 ```
 
 Hostnames of each node must be visible by these commands.
@@ -1194,7 +1200,7 @@ Now check hostnames by PDSH
 **Command:**
 
 ```console
-pdsh -a hostname
+[mpiuser@masternode ~]$ pdsh -a hostname
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -1206,7 +1212,7 @@ Check if all nodes have GCC or not
 **Command:**
 
 ```console
-rpm -q GCC
+[root@masternode ~]# rpm -q GCC
 ```
 
 The version of GCC will be visible
@@ -1214,7 +1220,7 @@ The version of GCC will be visible
 **Command:**
 
 ```console
-rpm -qa | grep g77
+[root@masternode ~]# rpm -qa | grep g77
 ```
 
 If not shown by this command you can run
@@ -1222,7 +1228,7 @@ If not shown by this command you can run
 **Command:**
 
 ```console
-yum list | grep g77
+[root@masternode ~]# yum list | grep g77
 ```
 
 If g77 exists this will be visible there.
@@ -1232,7 +1238,7 @@ Install g77 on masternode
 **Command:**
 
 ```console
-yum -y install compat-gcc-34-g77
+[root@masternode ~]# yum -y install compat-gcc-34-g77
 ```
 
 Installing g77 on node1 and node2 from masternode
@@ -1240,7 +1246,7 @@ Installing g77 on node1 and node2 from masternode
 **Command:**
 
 ```console
-pdsh -w node1,node2 yum -y install compat-gcc-34-g77
+[root@masternode ~]# pdsh -w node1,node2 yum -y install compat-gcc-34-g77
 ```
 
 All prerequisites are now installed.
@@ -1256,7 +1262,7 @@ So, MPI is basically Message Passing Interface is the language that is used to r
 **Command:**
 
 ```console
-scp root@10.0.0.2:/root/mpi\* .
+[mpiuser@masternode ~]$ scp root@10.0.0.2:/root/mpi* .
 ```
 
 Press yes
@@ -1268,7 +1274,7 @@ Mpi is downloaded in the home directory
 **Command:**
 
 ```console
-ls -lh
+[mpiuser@masternode ~]$ ls -lh
 ```
 
 The file is not owned by mpiuser
@@ -1276,7 +1282,7 @@ The file is not owned by mpiuser
 **Command:**
 
 ```console
-chown mpiuser:mpigroup /cluster -R
+[root@masternode /]# chown mpiuser:mpigroup /cluster -R
 ```
 
 Access is now given to mpiuser
@@ -1286,7 +1292,7 @@ Switch user to mpiuser
 **Command:**
 
 ```console
-su - mpiuser
+[root@masternode /]# su - mpiuser
 ```
 
 Moving mpi
@@ -1294,25 +1300,25 @@ Moving mpi
 **Command:**
 
 ```console
-mv mpich2-1.0.8.tar.gz ..
+[mpiuser@masternode ~]$ mv mpich2-1.0.8.tar.gz ..
 ```
 
 **Command:**
 
 ```console
-ls
+[mpiuser@masternode ~]$ ls
 ```
 
 **Command:**
 
 ```console
-cd ..
+[mpiuser@masternode ~]$ cd ..
 ```
 
 **Command:**
 
 ```console
-ls -lh
+[mpiuser@masternode cluster]$ ls -lh
 ```
 
 As you can see it is nowhere.
@@ -1322,25 +1328,25 @@ Now uncompressing
 **Command:**
 
 ```console
-tar xzf mpich2-1.0.8.tar.gz
+[mpiuser@masternode cluster]$ tar xzf mpich2-1.0.8.tar.gz
 ```
 
 **Command:**
 
 ```console
-ls
+[mpiuser@masternode cluster]$ ls
 ```
 
 **Command:**
 
 ```console
-cd mpich2-1.0.8
+[mpiuser@masternode cluster]$ cd mpich2-1.0.8
 ```
 
 **Command:**
 
 ```console
-ls
+[mpiuser@masternode mpich2-1.0.8]$ ls
 ```
 
 There are so many files we are now configuring.
@@ -1350,7 +1356,7 @@ This will be a new directory.
 **Command:**
 
 ```console
-./Pictures/configure –prefix=/cluster/mpich2
+[mpiuser@masternode mpich2-1.0.8]$ ./configure –-prefix=/cluster/mpich2
 ```
 
 All the parts which were left during the installation will be installed by this command.
