@@ -1,19 +1,16 @@
 <div align="right">
 
-#
----
+
+
 # **Parallel &amp; Distributed Computing**
----
-#
----
+
+
 # **Final Project**
----
----
+
 ## **Topic: HPC Clusters**
----
----
+
 ## **Project Report**
----
+
 **Section: BSCS 7A**
 
 **By**
