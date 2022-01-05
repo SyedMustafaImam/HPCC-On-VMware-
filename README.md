@@ -1364,7 +1364,7 @@ All the parts which were left during the installation will be installed by this 
 **Command:**
 
 ```console
-make
+[mpiuser@masternode mpich2-1.0.8]$ make
 ```
 
 Now the files will move to /cluster directory
@@ -1372,7 +1372,7 @@ Now the files will move to /cluster directory
 **Command:**
 
 ```console
-make install
+[mpiuser@masternode mpich2-1.0.8]$ make install
 ```
 
 next, I&#39;m going to set up some environment variables in the MPI user&#39;s bash\_profile.
@@ -1382,33 +1382,33 @@ First goto home directory
 **Command:**
 
 ```console
-cd
+[mpiuser@masternode mpich2-1.0.8]$ cd
 ```
 
 **Command:**
 
 ```console
-vi .bash\_profile
+[mpiuser@masternode ~]$ vi .bash_profile
 ```
 
 Add these lines there
 
 ```console
-$PATH:$HOME/bin:/cluster/mpich2/bin
-```
+PATH=$PATH:$HOME/bin:/cluster/mpich2/bin
 
 LD\_LIBRARY\_PATH=$LD\_LIBRARY\_PATH:/cluster/mpich2/lib
 
 export PATH
 
 export LD\_LIBRARY\_PATH
+```
 
 If you don&#39;t want to logout
 
 **Command:**
 
 ```console
-source .bash\_profile
+[mpiuser@masternode ~]$ source .bash_profile
 ```
 
 This will load the new values
@@ -1418,7 +1418,7 @@ You can also verify by the echo command
 **Command:**
 
 ```console
-echo $PATH
+[mpiuser@masternode ~]$ echo $PATH
 ```
 
 Check if it is able to find MPD
@@ -1426,19 +1426,23 @@ Check if it is able to find MPD
 **Command:**
 
 ```console
-which mpd
+[mpiuser@masternode ~]$ which mpd
 ```
 
 Check if it is able to find mpiexec
 
-Command: which mpiexec
+**Command:** 
+
+```console
+[mpiuser@masternode ~]$ which mpiexec
+```
 
 Check if it is able to find mpirun
 
 **Command:**
 
 ```console
-which mpirun
+[mpiuser@masternode ~]$ which mpirun
 ```
 
 Create an mpd.host file
@@ -1446,41 +1450,46 @@ Create an mpd.host file
 **Command:**
 
 ```console
-cat \&gt;\&gt; /cluster/mpiuser/mpd.hosts \&lt;\&lt; EOF
+[mpiuser@masternode ~]$ cat >> /cluster/mpiuser/mpd.hosts << EOF
 ```
 
-**\&gt;** masternode
+**>** masternode
 
-**\&gt;** node1
+**>** node1
 
-**\&gt;** node2
+**>** node2
 
-**\&gt;** EOF
+**>** EOF
 
 Check the names here of all nodes
 
 **Command:**
 
 ```console
-cat \&gt;\&gt; /cluster/mpiuser/mpd.hosts
+[mpiuser@masternode ~]$ cat /cluster/mpiuser/mpd.hosts
 ```
+masternode
+
+node1
+
+node2
 
 If you don&#39;t want your masternode to take part in any kind of computation follow the command below.
 
 **Command:**
 
 ```console
-vi /cluster/mpiuser/mpd.hostfile
+[mpiuser@masternode ~]$ vi /cluster/mpiuser/mpd.hosts
 ```
 
 Remove masternode from here and exit
 
-Now creating secret files
+Now creating a secret file
 
 **Command:**
 
 ```console
-vi /cluster/mpiuser/.mpd.conf
+[mpiuser@masternode ~]$ vi /cluster/mpiuser/.mpd.conf
 ```
 
 Add this line
@@ -1494,7 +1503,7 @@ Boot mpt on compute nodes
 **Command:**
 
 ```console
-mpd &amp;
+[mpiuser@masternode ~]$ mpd &
 ```
 
 If it has permission issue follow below command
@@ -1502,13 +1511,13 @@ If it has permission issue follow below command
 **Command:**
 
 ```console
-chmod 0600 /cluster/mpiuser/.mpd.conf
+[mpiuser@masternode ~]$ chmod 0600 /cluster/mpiuser/.mpd.conf
 ```
 
 **Command:**
 
 ```console
-ps aux | grep mpd
+[mpiuser@masternode ~]$ ps aux | grep mpd
 ```
 
 Now again Booting mpt on compute nodes
@@ -1516,7 +1525,7 @@ Now again Booting mpt on compute nodes
 **Command:**
 
 ```console
-mpd &amp;
+[mpiuser@masternode ~]$ mpd &
 ```
 
 Checking if it&#39;s running
@@ -1524,7 +1533,7 @@ Checking if it&#39;s running
 **Command:**
 
 ```console
-mpdtrace -l
+[mpiuser@masternode ~]$ mpdtrace -l
 ```
 
 Exit all
@@ -1532,13 +1541,13 @@ Exit all
 **Command:**
 
 ```console
-mpdallexit
+[mpiuser@masternode ~]$ mpdallexit
 ```
 
 **Command:**
 
 ```console
-mpdboot -n 2 --chkuponly
+[mpiuser@masternode ~]$ mpdboot -n 2 --chkuponly
 ```
 
 Now you can see 2 hosts are up
@@ -1546,7 +1555,7 @@ Now you can see 2 hosts are up
 **Command:**
 
 ```console
-ps aux | grep mpd
+[mpiuser@masternode ~]$ ps aux | grep mpd
 ```
 
 Now edit this file
@@ -1554,7 +1563,7 @@ Now edit this file
 **Command:**
 
 ```console
-vi /cluster/mpiuser/mpd.hosts
+[mpiuser@masternode ~]$ vi /cluster/mpiuser/mpd.hosts
 ```
 
 Add this line
@@ -1568,7 +1577,7 @@ Checking how many servers are up
 **Command:**
 
 ```console
-mpdboot -n 3 --chkuponly
+[mpiuser@masternode ~]$ mpdboot -n 3 --chkuponly
 ```
 
 Now you can see 3 hosts are up
@@ -1576,13 +1585,13 @@ Now you can see 3 hosts are up
 **Command:**
 
 ```console
-mpdboot -n 3
+[mpiuser@masternode ~]$ mpdboot -n 3
 ```
 
 **Command:**
 
 ```console
-mpdtrace
+[mpiuser@masternode ~]$ mpdtrace
 ```
 
 Now exit from all
@@ -1590,7 +1599,7 @@ Now exit from all
 **Command:**
 
 ```console
-mpdexitall
+[mpiuser@masternode ~]$ mpdexitall
 ```
 
 Now check if I am traced or not
@@ -1598,15 +1607,20 @@ Now check if I am traced or not
 **Command:**
 
 ```console
-mpdtrace
+[mpiuser@masternode ~]$ mpdtrace
 ```
 
 Run each command separately and see the time difference
 
 **Command:**
-
 ```console
-mpiexec -n 1 ./Pictures/cpi
+[mpiuser@masternode ~]$ cd ..
+```
+```console
+[mpiuser@masternode cluster]$ cd mpich2-1.0.8/examples
+```
+```console
+[mpiuser@masternode examples]$ mpiexec -n 1 ./cpi
 ```
 
 As you can see execution time
@@ -1614,13 +1628,13 @@ As you can see execution time
 **Command:**
 
 ```console
-mpiexec -n 2 ./Pictures/cpi
+[mpiuser@masternode examples]$ mpiexec -n 2 ./cpi
 ```
 
 **Command:**
 
 ```console
-mpiexec -n 3 ./Pictures/cpi
+[mpiuser@masternode examples]$ mpiexec -n 3 ./cpi
 ```
 
 Compiling a program
@@ -1628,13 +1642,13 @@ Compiling a program
 **Command:**
 
 ```console
-mpicc -o icpi icpic.c
+[mpiuser@masternode examples]$ mpicc -o icpi icpic.c
 ```
 
 **Command:**
 
 ```console
-ls
+[mpiuser@masternode examples]$ ls
 ```
 
 It&#39;s compiled.
@@ -1642,7 +1656,7 @@ It&#39;s compiled.
 **Command:**
 
 ```console
-mpiexec -n 1 ./Pictures/icpi
+[mpiuser@masternode examples]$ mpiexec -n 1 ./icpi
 ```
 
 Enter any large random number and see the execution time.
@@ -1652,7 +1666,7 @@ Now run this using 2 nodes
 **Command:**
 
 ```console
-mpiexec -n 1 ./Pictures/icpi
+[mpiuser@masternode examples]$ mpiexec -n 2 ./icpi
 ```
 
 Enter the same number and see the execution time difference.
