@@ -95,8 +95,7 @@ Table of contents
 - [**Installation of PDSH**](#installation-of-pdsh)
 - [**Setup NFS**](#setup-nfs)
 - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
-  - [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
-- [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc-1)
+- [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
 - [**Installation of MPI**](#installation-of-mpi)
 - [**Compiling Linpack**](#compiling-linpack)
 - [**Benchmarking**](#benchmarking)
@@ -1161,12 +1160,7 @@ Now check hostnames by PDSH
 ```console
 pdsh -a hostname
 ```
-## **Installation of prerequisites packages (GCC, G77, etc)**
 
-**Command:** 
-```console
-pdsh -a hostname
-```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 #
