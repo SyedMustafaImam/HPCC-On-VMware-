@@ -1163,8 +1163,10 @@ pdsh -a hostname
 ```
 ## **Installation of prerequisites packages (GCC, G77, etc)**
 
-**Command:** pdsh -a hostname
-
+**Command:** 
+```console
+pdsh -a hostname
+```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 #
