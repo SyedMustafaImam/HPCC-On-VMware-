@@ -81,24 +81,24 @@ Table of contents
 
 - [**1.Introduction**](#1introduction)
 - [**2.Use Cases**](#2use-cases)
-- [**Research Labs**](#research-labs)
-- [**Media And Entertainment**](#media-and-entertainment)
-- [**Oil and gas**](#oil-and-gas)
-- [**Artificial Intelligence**](#artificial-intelligence)
-- [**Financial Services**](#financial-services)
+  - [**Research Labs**](#research-labs)
+  - [**Media And Entertainment**](#media-and-entertainment)
+  - [**Oil and gas**](#oil-and-gas)
+  - [**Artificial Intelligence**](#artificial-intelligence)
+  - [**Financial Services**](#financial-services)
 - [**3.Steps**](#3steps)
-- [**Creation Of Virtual Machines**](#creation-of-virtual-machines)
-- [**Linux Installation on nodes**](#linux-installation-on-nodes)
-- [**Configuring etc host file**](#configuring-etc-host-file)
-- [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
-- [**Setup NTP Service**](#setup-ntp-service)
-- [**Installation of PDSH**](#installation-of-pdsh)
-- [**Setup NFS**](#setup-nfs)
-- [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
-- [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
-- [**Installation of MPI**](#installation-of-mpi)
-- [**Compiling Linpack**](#compiling-linpack)
-- [**Benchmarking**](#benchmarking)
+  - [**Creation Of Virtual Machines**](#creation-of-virtual-machines)
+  - [**Linux Installation on nodes**](#linux-installation-on-nodes)
+  - [**Configuring etc host file**](#configuring-etc-host-file)
+  - [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
+  - [**Setup NTP Service**](#setup-ntp-service)
+  - [**Installation of PDSH**](#installation-of-pdsh)
+  - [**Setup NFS**](#setup-nfs)
+  - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
+  - [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
+  - [**Installation of MPI**](#installation-of-mpi)
+  - [**Compiling Linpack**](#compiling-linpack)
+  - [**Benchmarking**](#benchmarking)
 
 
 
@@ -115,36 +115,36 @@ An HPC is Deployed on-premises, at the edge, or in the cloud. HPC solutions are 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Research Labs**
+
+## **Research Labs**
 
 HPC is used to help scientists find sources of renewable energy, understand the evolution of our universe, predict and track storms and create new materials.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Media And Entertainment**
+
+## **Media And Entertainment**
 
 HPC is used to edit feature films, render mind-blowing special effects, and stream live events around the world.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Oil and gas**
+
+## **Oil and gas**
 
 HPC is used to more accurately identify where to drill for new wells and to help boost production from existing wells.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Artificial Intelligence**
+
+## **Artificial Intelligence**
 
 HPC is used to detect credit card fraud, provide self-guided technical support, reach self-driving vehicles, and improve cancer screening techniques.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Financial Services**
+
+## **Financial Services**
 
 HPC is used to track real-time stock trends and automate trading.
 
@@ -153,8 +153,8 @@ HPC is used to track real-time stock trends and automate trading.
 
 # **3.Steps**
 
-#
-# **Creation Of Virtual Machines**
+
+## **Creation Of Virtual Machines**
 
 The master node is set up by the name &#39;HPC Master&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine and the network working on a bridge network. The System Configuration of the HPC Master is presented below:
 
@@ -174,8 +174,8 @@ An NTP server was also created by using a node that is not part computation perf
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Linux Installation on nodes**
+
+## **Linux Installation on nodes**
 
 After booting up from the image it will automatically go into the install mode.
 
@@ -306,8 +306,8 @@ Now repeat the same process for Node2 as you have done for the Node1.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Configuring etc host file**
+
+## **Configuring etc host file**
 
 **Command:** 
 ```console
@@ -349,8 +349,8 @@ Now, the, etc hosts file is configured.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **SSH equivalence establishment for user root**
+
+## **SSH equivalence establishment for user root**
 
 Now we will generate public and private keys (DSA and RSA) of all nodes.
 
@@ -576,8 +576,8 @@ exit
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Setup NTP Service**
+
+## **Setup NTP Service**
 
 **Setupping NTP service on node1.**
 
@@ -819,8 +819,8 @@ watch &quot;ntpq -p -n&quot;
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Installation of PDSH**
+
+## **Installation of PDSH**
 
 Check if pdsh is downloaded on the host machine or not.
 
@@ -918,8 +918,8 @@ pdsh -a ntpq -p -n
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Setup NFS**
+
+## **Setup NFS**
 
 Now setup nfs on masternode
 
@@ -937,13 +937,12 @@ vi /etc/exports/
 ```
 
 
-**Command:** vi /etc/exports/
 
 
 Add
-
+```console
 /cluster \*(rw,no\_root\_squash,sync)
-
+```
 Save and exit
 
 Restart NFS service
@@ -1018,8 +1017,8 @@ masternode:/cluster /cluster nfs defaults 0 0
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Creation of ordinary user and also setup SSH equivalence**
+
+## **Creation of ordinary user and also setup SSH equivalence**
 
 **Group:** mpigroup-600
 
@@ -1161,8 +1160,8 @@ pdsh -a hostname
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Installation of prerequisites packages (GCC, G77, etc)**
+
+## **Installation of prerequisites packages (GCC, G77, etc)**
 
 
 Check if all nodes have GCC or not
@@ -1201,8 +1200,8 @@ All prerequisites are now installed.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Installation of MPI**
+
+## **Installation of MPI**
 
 Now, we go for MPI installation.
 
@@ -1519,8 +1518,8 @@ Remember real hardware clusters will give much accuracy and proficiency.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Compiling Linpack**
+
+## **Compiling Linpack**
 
 For linpack, you would need a BLAS library.
 
@@ -1713,8 +1712,8 @@ Save and exit
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#
-# **Benchmarking**
+
+## **Benchmarking**
 
 Now build this
 
