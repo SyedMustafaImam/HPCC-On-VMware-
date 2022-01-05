@@ -1,36 +1,71 @@
-<div align="right">
+
+---
 
 
-<p style='color:#FAF9F6;font-size:32px; font-weight:bold'>Parallel &amp; Distributed Computing </p>
 
 
-<p style='color:#FAF9F6;font-size:32px; font-weight:bold'>Final Project</p>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
 
 
-<p style='color:#FAF9F6;font-size:29px; font-weight:bold'> Topic: HPC Clusters</p>
 
-<p style='color:#FAF9F6;font-size:21.4px; font-weight:bold'>Project Report</p>
-<p style='color:#FAF9F6;font-size:15.1px; font-weight:bold'>Section: BSCS 7A</p>
-<p style='color:#FAF9F6;font-size:15.1px; font-weight:bold'>By</p>
-<p style='color:#FAF9F6;font-size:15.1px;'>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<br />
+<br />
+<br />
+
+
+  <a href="https://github.com/SyedMustafaImam/HPCC-On-VMware-">
+    <img src="Pictures/logo.png" alt="Logo" >
+  </a>
+<p style='font-size:32px; font-weight:bold'>Parallel &amp; Distributed Computing </p>
+  <h3 align="center">HPC Cluster Configuration</h3>
+
+  <p align="center">
+    This documentation will help you create a hpcc system on vmware.
+    <br />
+    <a href="https://github.com/SyedMustafaImam/HPCC-On-VMware-"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/SyedMustafaImam/HPCC-On-VMware-">Tutorial</a>
+    ·
+    <a href="https://github.com/SyedMustafaImam/HPCC-On-VMware-/issues">Softwares</a>
+    ·
+    <a href="https://github.com/SyedMustafaImam/HPCC-On-VMware-/issues">Issues</a>
+  </p>
+
+<p style='font-size:21.4px; font-weight:bold'>Project Report</p>
+<p style='font-size:15.1px; font-weight:bold'>Section: BSCS 7A</p>
+<p style='font-size:15.1px; font-weight:bold'>By</p>
+<p style='font-size:15.1px;'>
 Syed Hurrar Hasan Rizvi (1812135)</p>
-<p style='color:#FAF9F6;font-size:15.1px;'>
+<p style='font-size:15.1px;'>
 Syed Mustafa Imam (1812134)
 </p>
-<p style='color:#FAF9F6;font-size:15.1px;'>
+<p style='font-size:15.1px;'>
 Hirdesh Kumar (1812114)
 </p>
-<p style='color:#FAF9F6;font-size:15.1px;'>
+<p style='font-size:15.1px;'>
 Elliott Francis Joseph (1812110)
 </p>
-<p style='color:#FAF9F6;font-size:15.1px;'>
-Date: 23-12-2021
-</p>
 
-</div> 
+<br />
+
+---
+
+</div>
+
+
 
 <p style='color:white;font-size:28px;font-weight:bold'>
-Table of contents 
+Table of contents
 </p>
 
 - [**1.Introduction**](#1introduction)
@@ -54,11 +89,9 @@ Table of contents
   - [**Compiling Linpack**](#compiling-linpack)
   - [**Benchmarking**](#benchmarking)
 
-
 # **1.Introduction**
 
 An HPC cluster is a collection of hundreds or thousands of servers that are networked together, each server is known as a node. Each node in a cluster works in parallel with each other, boosting processing speed to deliver high-performance computing. HPC is appropriate for most small and medium-sized businesses since these nodes are very close together, this is the reason why it is called a cluster. All cluster nodes have the same components as a laptop or desktop such as the CPU, cores, memory, and disk space. The difference between personal computers and a cluster node is in quantity, quality, and power of the components. User login to the cluster head node is done by using the ssh program.
-
 
 # **2.Use Cases**
 
@@ -84,7 +117,6 @@ HPC is used to detect credit card fraud, provide self-guided technical support, 
 
 HPC is used to track real-time stock trends and automate trading.
 
-
 # **3.Steps:**
 
 ## **Creation Of Virtual Machines**
@@ -93,20 +125,18 @@ The master node is set up by the name &#39;HPC Master&#39; with Red Hat Enterpri
 
 ![ScreenShot](./Pictures/master.JPG)
 
-
 The compute node is also created by the name &#39;node1&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine with a standard data store and a bridged network. The System Configuration of the HPCNode1 are presented below:
 
 ![ScreenShot](./Pictures/node1.JPG)
-
 
 Another compute node is also created by the name &#39;node2&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine with a standard data store and a bridged network. The System Configuration of the HPCNode2 are presented below:
 
 ![ScreenShot](./Pictures/node2.JPG)
 
-
 An NTP server was also created by using a node that is not part computation performed by a cluster. It was done by using Ubuntu OS 64 bit as the main OS of the Virtual Machine with a standard data store and a NAT network. System Configurations are presented below:
 
 ![ScreenShot](./Pictures/ntp.JPG)
+
 ## **Linux Installation on nodes**
 
 After booting up from the image it will automatically go into the install mode.
@@ -222,6 +252,7 @@ Add three lines here
 Then back to the console.
 
 **Command:**
+
 ```console
 [node1@node1]# scp /etc/hosts node1:/etc/ 
 ```
@@ -230,7 +261,7 @@ Except for the fingerprint of node1, node1&#39;s password is redhat.
 
 Do the same thing for node2
 
-**Command:** 
+**Command:**
 
 ```console
 [node1@node1]# scp /etc/hosts node2:/etc/
@@ -246,15 +277,18 @@ Now we will generate public and private keys (DSA and RSA) of all nodes.
 
 Generate dsa keys
 
-**Command:** 
+**Command:**
+
 ```console
 ssh-keygen -t dsa
 ```
+
 Just press enter, no need to enter a passphrase.
 
 Now generate the rsa keys
 
-**Command:** 
+**Command:**
+
 ```console
 ssh-keygen -t dsa
 ```
@@ -263,31 +297,40 @@ Just press enter, no need to enter a passphrase.
 
 Now if you want you can check these keys
 
-**Command:** 
+**Command:**
+
 ```console
 cd .ssh/
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 ls -l
 ```
+
 As you can see both dsa and rsa are visible along with the public and private keys.
 
 Now copy all four key files for this directory
 
-**Command:** 
+**Command:**
+
 ```console
 cd ..
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 scp -r .ssh node1:/root/
 ```
+
 Enter the password which is redhat
 
 As files are copied in node 1 now do the same process for node 2.
 
-**Command:** 
+**Command:**
+
 ```console
 scp -r .ssh node2:/root/
 ```
@@ -295,23 +338,27 @@ scp -r .ssh node2:/root/
 Now do one more step
 
 **Command:**
+
 ```console
 cd .ssh/
 ```
 
-**Command:** 
+**Command:**
+
 ```console
 cat \*.pub \&gt;\&gt; authorized\_keys
 ```
 
-**Command:** 
+**Command:**
+
 ```console
 cd ..
 ```
 
 Now copy these files on both nodes again
 
-**Command:** 
+**Command:**
+
 ```console
 scp -r .ssh node1:/root/
 ```
@@ -320,7 +367,8 @@ Enter the password which is redhat
 
 As files are copied in node 1 now do the same process for node 2.
 
-**Command:** 
+**Command:**
+
 ```console
 scp -r .ssh node2:/root/
 ```
@@ -328,6 +376,7 @@ scp -r .ssh node2:/root/
 Now We will generate RSA fingerprints,
 
 **Command:**
+
 ```console
 ssh-keyscan -t dsa masternode node1 node2
 ```
@@ -335,20 +384,23 @@ ssh-keyscan -t dsa masternode node1 node2
 Now I&#39;m going to put it in a special file on this log
 
 **Command:**
+
 ```console
 ssh-keyscan -t dsa masternode node1 node2 \&gt; /etc/ssh/ssh\_known\_hosts
 ```
 
 You see this file. This file is a valid one, but it does not exist by default. Now what I&#39;m going to do is I&#39;m going to scan the RSA keys of the same nodes and I&#39;m going to append that to this file.
 
-**Command:** 
+**Command:**
+
 ```console
 ssh-keyscan -t rsa masternode node1 node2 \&gt;\&gt; /etc/ssh/ssh\_known\_hosts
 ```
 
 Now see how the file looks like
 
-**Command:** 
+**Command:**
+
 ```console
 less /etc/ssh/ssh\_known\_hosts
 ```
@@ -356,122 +408,161 @@ less /etc/ssh/ssh\_known\_hosts
 Now replicate this file to all nodes.
 
 **Command:**
+
 ```console
 scp /etc/ssh/ssh\_known\_hosts node1:/etc/ssh
 ```
 
 **Command:**
+
 ```console
 scp /etc/ssh/ssh\_known\_hosts node2:/etc/ssh
 ```
+
 **Testing by logging it into each node**
 
 **Command:**
+
 ```console
 ssh masternode
 ```
 
 **Command:**
+
 ```console
 exit
 ```
 
 **Command:**
+
 ```console
 ssh node1
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 exit
 ```
 
 **Command:**
+
 ```console
 ssh node2
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 exit
 ```
 
 **Testing by logging all nodes into each other node**
 
-**Command:** 
+**Command:**
+
 ```console
 ssh masternode uptime
 ```
-**Command:** 
-```console
-exit
-```
-**Command:** 
-```console
-ssh node1 uptime
-```
+
 **Command:**
+
 ```console
 exit
 ```
 
-**Command:** 
+**Command:**
+
 ```console
-ssh node2 uptime
+ssh node1 uptime
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 exit
 ```
+
+**Command:**
+
+```console
+ssh node2 uptime
+```
+
+**Command:**
+
+```console
+exit
+```
+
 ## **Setup NTP Service**
 
 **Setupping NTP service on node1.**
 
-**Command:** 
+**Command:**
+
 ```console
 vi /etc/ntp.conf
 ```
+
 Disable server 0, server 1, server 2
 
 Disable server local-clock and fudge
 
 Restart service
 
-**Command:** 
+**Command:**
+
 ```console
 service ntpd restart
 ```
+
 **Command:**
+
 ```console
 ntpq -p -n
 ```
+
 Now copy rpm for centos
 
-**Command:** 
+**Command:**
+
 ```console
 rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 yum -y install ntp
 ```
+
 As the file is not copied so we will copy it again
 
-**Command:** 
+**Command:**
+
 ```console
 scp node1:/etc/yum.repos.d/CentOS-Base.repo .
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 scp node1:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
 ```
+
 Now install again:
 
-**Command:** 
+**Command:**
+
 ```console
 yum -y install ntp
 ```
+
 **Setupping ntp service on node2.**
 
-**Command:** 
+**Command:**
+
 ```console
 vi /etc/ntp.conf
 ```
@@ -482,23 +573,28 @@ Disable server local-clock and fudge
 
 Restart service
 
-**Command:** 
+**Command:**
+
 ```console
 service ntpd restart
 ```
 
-**Command:** 
+**Command:**
+
 ```console
 ntpq -p -n
 ```
 
 Now copy rpm for centos
 
-**Command:** 
+**Command:**
+
 ```console
 rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 yum -y install ntp
 ```
@@ -506,55 +602,73 @@ yum -y install ntp
 As the file is not copied so we will copy it again
 
 **Command:**
+
 ```console
 scp node2:/etc/yum.repos.d/CentOS-Base.repo .
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 scp node2:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
 ```
+
 Now install again:
 
 **Command:**
+
 ```console
 yum -y install ntp
 ```
+
 **Now configure the ntp file**
 
 **Command:**
+
 ```console
 vi /etc/ntp.conf
 ```
+
 Add server 10.0.0.2 which is our host machine.
 
 Disable server 0, sever1, server2
 
 Restart service
 
-**Command:** 
+**Command:**
+
 ```console
 service ntpd restart
 ```
+
 Now check configuration
 
 **Command:**
+
 ```console
 chkconfig –level 35 ntpd on
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 ntpq -p -n
 ```
+
 **Command:**
+
 ```console
 watch &quot;ntpq -p -n&quot;
 ```
+
 **Configure ntp on node1**
 
-**Command:** 
+**Command:**
+
 ```console
 vi /etc/ntp.conf
 ```
+
 Add server 10.0.0.2 which is our host machine.
 
 Disable server 0, sever1, server2
@@ -563,69 +677,90 @@ Disable local server, fudge
 
 Restart service
 
-**Command:** 
+**Command:**
+
 ```console
 service ntpd restart
 ```
+
 Now check configuration
 
-**Command:** 
+**Command:**
+
 ```console
 chkconfig –level 35 ntpd on
 ```
+
 **Command:**
+
 ```console
 ntpq -p -n
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 watch &quot;ntpq -p -n&quot;
 ```
+
 **Now copy these configurations on node2**
 
-**Command:** 
+**Command:**
+
 ```console
 scp /etc/ntp.conf node2:/etc/ntp.conf
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 chkconfig –level 35 ntpd on
 ```
+
 Restart service
 
-**Command:** 
+**Command:**
+
 ```console
 service ntpd restart
 ```
+
 Checking on the host machine if ntp is configured on all nodes.
 
-**Command:** 
+**Command:**
+
 ```console
 watch &quot;ntpq -p -n&quot;
 ```
-##
 
+##
 
 ## **Installation of PDSH**
 
 Check if pdsh is downloaded on the host machine or not.
 
 **Command:**
+
 ```console
 cd
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 ls
 ```
+
 If it is not downloaded you can download it from the SourceForge website by typing pdsh on google search.
 
 Now copy pdsh from masternode
 
-**Command:** 
+**Command:**
+
 ```console
 scp 10.0.0.2:/root/pdsh\* .
 ```
+
 Press yes
 
 Enter the password which is red hat
@@ -634,22 +769,28 @@ It&#39;s copied.
 
 Rebuild rpm
 
-**Command:** 
+**Command:**
+
 ```console
 rpmbuild –rebuild pdsh-2.18-1.src.rpm
 ```
+
 This is not mandatory for all nodes other than masternode
 
 Changing directory
 
 **Command:**
+
 ```console
  cd /usr/src/redhat/RPMS/i386/
 ```
-**Command:** 
+
+**Command:**
+
 ```console
 rpm -ivh pdsh-\*
 ```
+
 Now wait until it is debugging and installing
 
 Now everything is installed and pdsh works.
@@ -657,9 +798,11 @@ Now everything is installed and pdsh works.
 What does pdsh do? If you want to perform a certain operation on all the nodes, or any specific nodes, one way is to manually log in through SSH to each node and perform the task and the second is you can just tell PD shell to do it at will go out and perform that task on all the nodes. It&#39;s very simple. So suppose you want to execute the date command on all the nodes or uptime command on all the nodes or whatever. So you would just tell PD shell to do it but in order for PD shell to work, it needs a machine file.
 
 **Command:**
+
 ```console
 vi /etc/machines
 ```
+
 Add these three lines
 
 masternode
@@ -674,26 +817,32 @@ Now execute the pdsh on all nodes.
 
 What executes what let&#39;s say date, is simple.
 
-**Command:** 
+**Command:**
+
 ```console
 pdsh -a date
 ```
+
 It went out on all the nodes and it brought the output back from all the notes you see it they&#39;re all 100% At the same time that&#39;s not the because of PDSH because of NTP which we just set up you Just go to masternode and enter.
 
 **Command:**
+
 ```console
 pdsh -a ntpq -p -n
 ```
+
 ## **Setup NFS**
 
 Now setup nfs on masternode
 
 Coming back to home directory
 
-**Command:** 
+**Command:**
+
 ```console
 cd
 ```
+
 **Command:** vi /etc/exports/
 
 Add
@@ -1316,3 +1465,19 @@ You can see complete passing and failing reports at the end of the benchmarking 
 Now execute hpl programe and send output to textfile
 
 **Command:** mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
+
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/SyedMustafaImam/HPCC-On-VMware-/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
