@@ -826,8 +826,8 @@ Now copy pdsh from masternode
 
 Type yes
 
-Enter the password which is red hat
-
+Enter the password which is red hat,
+PDSH is now copied.
 It&#39;s copied.
 
 Rebuild rpm
@@ -906,12 +906,12 @@ Coming back to home directory
 **Command:**
 
 ```console
-cd
+[root@masternode i386]# cd
 ```
 
 **Command:** 
 ```console
-vi /etc/exports/
+[root@masternode ~]# vi /etc/exports/
 ```
 
 
@@ -919,7 +919,7 @@ vi /etc/exports/
 
 Add
 ```console
-/cluster \*(rw,no\_root\_squash,sync)
+/cluster       *(rw,no_root_squash,sync)
 ```
 Save and exit
 
@@ -927,49 +927,49 @@ Restart NFS service
 
 **Command:** 
 ```console
-service nfs restart
+[root@masternode ~]# service nfs restart
 ```
 Check Configuration
 
 **Command:** 
 ```console
-chkconfig –level 35 nfs on
+[root@masternode ~]# chkconfig -–level 35 nfs on
 ```
 Make a directory
 
 **Command:** 
 ```console
-mkdir /cluster
+[root@masternode ~]# mkdir /cluster
 ```
 Again restart service
 
 **Command:** 
 ```console
-service nfs restart
+[root@masternode ~]# service nfs restart
 ```
 Now we have to create this directory on all nodes so we will just use pdsh to create on all nodes at once
 
 **Command:** 
 ```console
-pdsh -w node1,node2 mkdir /cluster
+[root@masternode ~]# pdsh -w node1,node2 mkdir /cluster
 ```
 Now mounting
 
 **Command:** 
 ```console
-df -hT
+[root@node1 yum.repos.d]# df -hT
 ```
 Execute this command on node1
 
 **Command:** 
 ```console
-mount -t nfs masternode:/cluster /cluster/
+[root@node1 yum.repos.d]# mount -t nfs masternode:/cluster /cluster/
 ```
 Execute this command on node2
 
 **Command:** 
 ```console
-mount -t nfs masternode:/cluster /cluster/
+[root@node2 ~]# mount -t nfs masternode:/cluster /cluster/
 ```
 Now you can see that it is written that you have mounted it from the masternode.
 
@@ -977,12 +977,12 @@ Now you can see that it is written that you have mounted it from the masternode.
 
 **Command:** 
 ```console
-vi /etc/fstab
+[root@node1 ~]# vi /etc/fstab
 ```
 Add this line
-
-masternode:/cluster /cluster nfs defaults 0 0
-
+```bash
+masternode:/cluster /cluster  nfs defaults  0 0
+```
 **Now specify etc/fstab on node2**
 
 **Command:** 
