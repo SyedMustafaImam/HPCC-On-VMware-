@@ -1,55 +1,38 @@
-<p align="right">
+<div align="right">
 
 
-<<<<<<< HEAD
-#
-# **Parallel &amp; Distributed Computing**
-
-#
-# **Final Project**
+<p style='color:#FAF9F6;font-size:32px; font-weight:bold'>Parallel &amp; Distributed Computing </p>
 
 
-## **Topic: HPC Clusters**
-
-## **Project Report**
-=======
+<p style='color:#FAF9F6;font-size:32px; font-weight:bold'>Final Project</p>
 
 
-# **Parallel &amp; Distributed Computing**
+<p style='color:#FAF9F6;font-size:29px; font-weight:bold'> Topic: HPC Clusters</p>
 
-
-# **Final Project**
-
-## **Topic: HPC Clusters**
-
-## **Project Report**
-
->>>>>>> 026dacc730031aa90b4396127b9a53dcb9f4cf46
-**Section: BSCS 7A**
-
-**By**
-
-Syed Hurrar Hasan Rizvi (1812135)
-
+<p style='color:#FAF9F6;font-size:21.4px; font-weight:bold'>Project Report</p>
+<p style='color:#FAF9F6;font-size:15.1px; font-weight:bold'>Section: BSCS 7A</p>
+<p style='color:#FAF9F6;font-size:15.1px; font-weight:bold'>By</p>
+<p style='color:#FAF9F6;font-size:15.1px;'>
+Syed Hurrar Hasan Rizvi (1812135)</p>
+<p style='color:#FAF9F6;font-size:15.1px;'>
 Syed Mustafa Imam (1812134)
-
+</p>
+<p style='color:#FAF9F6;font-size:15.1px;'>
 Hirdesh Kumar (1812114)
-
+</p>
+<p style='color:#FAF9F6;font-size:15.1px;'>
 Elliott Francis Joseph (1812110)
-
+</p>
+<p style='color:#FAF9F6;font-size:15.1px;'>
 Date: 23-12-2021
-</p> 
+</p>
 
+</div> 
 
+<p style='color:white;font-size:28px;font-weight:bold'>
+Table of contents 
+</p>
 
-# Table of contents 
-
-
-- [**Parallel &amp; Distributed Computing**](#parallel--distributed-computing)
-- [**Final Project**](#final-project)
-  - [**Topic: HPC Clusters**](#topic-hpc-clusters)
-  - [**Project Report**](#project-report)
-- [Table of contents](#table-of-contents)
 - [**1.Introduction**](#1introduction)
 - [**2.Use Cases**](#2use-cases)
   - [**Research Labs**](#research-labs)
