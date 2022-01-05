@@ -203,12 +203,12 @@ On a virtual machine now we&#39;ve two more nodes to go on which we need to inst
 
 **Command:** 
 ```console
-[root@hostmachine ~]#cd machines
+[root@hostmachine ~]# cd machines
 ```
 
 **Command:** 
 ```console
-[root@hostmachine machines]#ls
+[root@hostmachine machines]# ls
 ```
 And we have this HPC master directory, which we have these files.
 
@@ -216,15 +216,15 @@ Let&#39;s enter into this directory by
 
 **Command:** 
 ```console
-[root@hostmachine machines]#cd HPCMaster
+[root@hostmachine machines]# cd HPCMaster
 ```
 **Command:** 
 ```console
-[root@hostmachine HPCMaster]#ls
+[root@hostmachine HPCMaster]# ls
 ```
 **Command:** 
 ```console
-[root@hostmachine HPCMaster]#ls -lh
+[root@hostmachine HPCMaster]# ls -lh
 ```
 As you can see, this is your virtual machine disk file named **HPCMaster.vmdk** , which consumes 1.6 GB.
 
@@ -232,17 +232,14 @@ So now I&#39;m copying this file.
 
 **Command:** 
 ```console
-[root@hostmachine HPCMaster]# ls ../Pictures/HPCNode1/
+[root@hostmachine HPCMaster]# ls -lh ../Pictures/HPCNode1/
 ```
-**Command:** 
-```console
-ls ../Pictures/HPCNode1/ -lh
-```
+
 As you can see you have four files there. Now we will copy this VMDK file from here and overwrite this VMDK file here.
 
 **Command:** 
 ```console
-[root@hostmachine HPCMaster]#cp HPCMaster.vmdk ../Pictures/HPCNode1/HPCNode1.vmdk
+[root@hostmachine HPCMaster]# cp HPCMaster.vmdk ../Pictures/HPCNode1/HPCNode1.vmdk
 ```
 Press y for yes overwriting.
 
@@ -250,7 +247,7 @@ As you can see the file is copied so let&#39;s check the list.
 
 **Command:** 
 ```console
-[root@hostmachine HPCMaster]#ls ../Pictures/HPCNode1/ -lh
+[root@hostmachine HPCMaster]# ls ../Pictures/HPCNode1/ -lh
 ```
 Let&#39;s try starting node1 and see what happens. Click power on and go to the console window and let it boot up. It will have all settings from your HPC master. That means it will also have the same hostname, same IP everything.
 
@@ -258,7 +255,7 @@ Once this is booted up. So let&#39;s go to the console, it will seem like a mast
 
 **Command:** 
 ```console
-[root@masternode ~]#vi /etc/sysconfig/network
+[root@masternode ~]# vi /etc/sysconfig/network
 ```
 Then edit hostname as **Node1**
 
@@ -266,7 +263,7 @@ And the IP is going to be
 
 **Command:** 
 ```console
-[root@masternode ~]#vi /etc/sysconfig/network-scripts/ifcfg-eth0
+[root@masternode ~]# vi /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
 Life config Ethernet zero should not get its IP from DHCP. It&#39;s going to be a static IP address equal to 10.0.0.11 and netmask is equal to 255.255.255.0
 
@@ -274,7 +271,7 @@ One more thing to see hosts.
 
 **Command:** 
 ```console
-[root@masternode ~]#vi /etc/hosts
+[root@masternode ~]# vi /etc/hosts
 ```
 remove this master node at all from the script.
 
@@ -282,15 +279,15 @@ Now let&#39;s change the hostname manually.
 
 **Command:** 
 ```console
-[root@masternode ~]#hostname node1
+[root@masternode ~]# hostname node1
 ```
 **Command:** 
 ```console
-[root@masternode ~]#service syslog restart
+[root@masternode ~]# service syslog restart
 ```
 **Command:** 
 ```console
-[root@masternode ~]#less /var/log/messages
+[root@masternode ~]# less /var/log/messages
 ```
 That will make sure that the logs in the various log messages are written correctly.
 
@@ -300,7 +297,7 @@ Then reboot this system
 
 **Command:** 
 ```console
-[root@masternode ~]#reboot
+[root@masternode ~]# reboot
 ```
 Now repeat the same process for Node2 as you have done for the Node1.
 
@@ -311,7 +308,7 @@ Now repeat the same process for Node2 as you have done for the Node1.
 
 **Command:** 
 ```console
-[root@masternode ~]#vi /etc/hosts
+[root@masternode ~]# vi /etc/hosts
 ```
 Now delete IP version 6 naming file
 
@@ -330,7 +327,7 @@ Then back to the console.
 **Command:**
 
 ```console
-[root@masternode ~]#scp /etc/hosts node1:/etc/ 
+[root@masternode ~]# scp /etc/hosts node1:/etc/ 
 ```
 
 Except for the fingerprint of node1, node1&#39;s password is redhat.
@@ -340,7 +337,7 @@ Do the same thing for node2
 **Command:**
 
 ```console
-[root@masternode ~]#scp /etc/hosts node2:/etc/
+[root@masternode ~]# scp /etc/hosts node2:/etc/
 ```
 
 Except for the fingerprint of node2, node2&#39;s password is redhat.
@@ -359,7 +356,7 @@ Generate dsa keys
 **Command:**
 
 ```console
-[root@masternode ~]#ssh-keygen -t dsa
+[root@masternode ~]# ssh-keygen -t dsa
 ```
 
 Just press enter, no need to enter a passphrase.
@@ -369,7 +366,7 @@ Now generate the rsa keys
 **Command:**
 
 ```console
-[root@masternode ~]#ssh-keygen -t rsa
+[root@masternode ~]# ssh-keygen -t rsa
 ```
 
 Just press enter, no need to enter a passphrase.
@@ -379,13 +376,13 @@ Now if you want you can check these keys
 **Command:**
 
 ```console
-[root@masternode ~]#cd .ssh/
+[root@masternode ~]# cd .ssh/
 ```
 
 **Command:**
 
 ```console
-[root@masternode .ssh]#ls -l
+[root@masternode .ssh]# ls -l
 ```
 
 As you can see both dsa and rsa are visible along with the public and private keys.
@@ -395,13 +392,13 @@ Now copy all four key files for this directory
 **Command:**
 
 ```console
-[root@masternode .ssh]#cd ..
+[root@masternode .ssh]# cd ..
 ```
 
 **Command:**
 
 ```console
-[root@masternode ~]#scp -r .ssh node1:/root/
+[root@masternode ~]# scp -r .ssh node1:/root/
 ```
 
 Enter the password which is redhat
@@ -411,7 +408,7 @@ As files are copied in node 1 now do the same process for node 2.
 **Command:**
 
 ```console
-[root@masternode ~]#scp -r .ssh node2:/root/
+[root@masternode ~]# scp -r .ssh node2:/root/
 ```
 
 Now do one more step
@@ -419,19 +416,19 @@ Now do one more step
 **Command:**
 
 ```console
-[root@masternode ~]#cd .ssh/
+[root@masternode ~]# cd .ssh/
 ```
 
 **Command:**
 
 ```console
-[root@masternode .ssh]#cat *.pub >> authorized\_keys
+[root@masternode .ssh]# cat *.pub >> authorized\_keys
 ```
 
 **Command:**
 
 ```console
-[root@masternode .ssh]#cd ..
+[root@masternode .ssh]# cd ..
 ```
 
 Now copy these files on both nodes again
@@ -439,7 +436,7 @@ Now copy these files on both nodes again
 **Command:**
 
 ```console
-[root@masternode ~]#scp -r .ssh node1:/root/
+[root@masternode ~]# scp -r .ssh node1:/root/
 ```
 
 Enter the password which is redhat
@@ -449,7 +446,7 @@ As files are copied in node 1 now do the same process for node 2.
 **Command:**
 
 ```console
-[root@masternode ~]#scp -r .ssh node2:/root/
+[root@masternode ~]# scp -r .ssh node2:/root/
 ```
 
 Now We will generate RSA fingerprints,
@@ -457,7 +454,7 @@ Now We will generate RSA fingerprints,
 **Command:**
 
 ```console
-[root@masternode ~]#ssh-keyscan -t dsa masternode node1 node2
+[root@masternode ~]# ssh-keyscan -t dsa masternode node1 node2
 ```
 
 Now I&#39;m going to put it in a special file on this log
@@ -465,7 +462,7 @@ Now I&#39;m going to put it in a special file on this log
 **Command:**
 
 ```console
-[root@masternode ~]#ssh-keyscan -t dsa masternode node1 node2 > /etc/ssh/ssh_known_hosts
+[root@masternode ~]# ssh-keyscan -t dsa masternode node1 node2 > /etc/ssh/ssh_known_hosts
 ```
 
 You see this file. This file is a valid one, but it does not exist by default. Now what I&#39;m going to do is I&#39;m going to scan the RSA keys of the same nodes and I&#39;m going to append that to this file.
@@ -473,7 +470,7 @@ You see this file. This file is a valid one, but it does not exist by default. N
 **Command:**
 
 ```console
-[root@masternode ~]#ssh-keyscan -t rsa masternode node1 node2 >> /etc/ssh/ssh_known_hosts
+[root@masternode ~]# ssh-keyscan -t rsa masternode node1 node2 >> /etc/ssh/ssh_known_hosts
 ```
 
 Now see how the file looks like
@@ -481,7 +478,7 @@ Now see how the file looks like
 **Command:**
 
 ```console
-[root@masternode ~]#less /etc/ssh/ssh_known_hosts
+[root@masternode ~]# less /etc/ssh/ssh_known_hosts
 ```
 
 Now replicate this file to all nodes.
@@ -489,13 +486,13 @@ Now replicate this file to all nodes.
 **Command:**
 
 ```console
-[root@masternode ~]#scp /etc/ssh/ssh_known_hosts node1:/etc/ssh
+[root@masternode ~]# scp /etc/ssh/ssh_known_hosts node1:/etc/ssh
 ```
 
 **Command:**
 
 ```console
-[root@masternode ~]#scp /etc/ssh/ssh_known_hosts node2:/etc/ssh
+[root@masternode ~]# scp /etc/ssh/ssh_known_hosts node2:/etc/ssh
 ``` 
 
 **Testing by logging it into each node**
@@ -503,37 +500,37 @@ Now replicate this file to all nodes.
 **Command:**
 
 ```console
-[root@masternode ~]#ssh masternode
+[root@masternode ~]# ssh masternode
 ```
 
 **Command:**
 
 ```console
-[root@masternode ~]#exit
+[root@masternode ~]# exit
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]#ssh node1
+[root@node1 ~]# ssh node1
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]#exit
+[root@node1 ~]# exit
 ```
 
 **Command:**
 
 ```console
-[root@masternode ~]#ssh node2
+[root@masternode ~]# ssh node2
 ```
 
 **Command:**
 
 ```console
-[root@node2 ~]#exit  
+[root@node2 ~]# exit  
 ```
 
 **Testing by logging all nodes into each other node**
@@ -541,20 +538,20 @@ Now replicate this file to all nodes.
 **Command:**
 
 ```console
-[root@node1 ~]#ssh masternode uptime
+[root@node1 ~]# ssh masternode uptime
 ```
 
 
 **Command:**
 
 ```console
-[root@node1 ~]#ssh node1 uptime
+[root@node1 ~]# ssh node1 uptime
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]#ssh node2 uptime
+[root@node1 ~]# ssh node2 uptime
 ```
 
 
@@ -568,7 +565,7 @@ Now replicate this file to all nodes.
 **Command:**
 
 ```console
-[root@node1 ~]#vi /etc/ntp.conf
+[root@node1 ~]# vi /etc/ntp.conf
 ```
 
 Disable server 0, server 1, server 2
@@ -580,13 +577,13 @@ Restart service
 **Command:**
 
 ```console
-[root@node1 ~]#service ntpd restart
+[root@node1 ~]# service ntpd restart
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]#ntpq -p -n
+[root@node1 ~]# ntpq -p -n
 ```
 
 Now copy rpm for centos
@@ -594,13 +591,13 @@ Now copy rpm for centos
 **Command:**
 
 ```console
-[root@node1 ~]#rpm –-import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+[root@node1 ~]# rpm –-import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]#yum -y install ntp
+[root@node1 ~]# yum -y install ntp
 ```
 
 As the file is not copied so we will copy it again
@@ -608,13 +605,13 @@ As the file is not copied so we will copy it again
 **Command:**
 
 ```console
-[root@node1 ~]#scp node1:/etc/yum.repos.d/CentOS-Base.repo .
+[root@node1 ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo .
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]#scp node1:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
+[root@node1 ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
 ```
 
 Now install again:
@@ -622,7 +619,7 @@ Now install again:
 **Command:**
 
 ```console
-[root@masternode ~]#yum -y install ntp
+[root@masternode ~]# yum -y install ntp
 ```
 
 **Setupping ntp service on node2.**
@@ -630,7 +627,7 @@ Now install again:
 **Command:**
 
 ```console
-[root@node2 ~]#vi /etc/ntp.conf
+[root@node2 ~]# vi /etc/ntp.conf
 ```
 
 Disable server 0, server 1, server 2
@@ -642,13 +639,13 @@ Restart service
 **Command:**
 
 ```console
-[root@node2 ~]#service ntpd restart
+[root@node2 ~]# service ntpd restart
 ```
 
 **Command:**
 
 ```console
-[root@node2 ~]#ntpq -p -n
+[root@node2 ~]# ntpq -p -n
 ```
 
 Now copy rpm for centos
@@ -656,13 +653,13 @@ Now copy rpm for centos
 **Command:**
 
 ```console
-[root@node2 ~]#rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+[root@node2 ~]# rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
 ```
 
 **Command:**
 
 ```console
-[root@node2 ~]#yum -y install ntp
+[root@node2 ~]# yum -y install ntp
 ```
 
 As the file is not copied so we will copy it again
@@ -670,13 +667,13 @@ As the file is not copied so we will copy it again
 **Command:**
 
 ```console
-[root@node2 ~]#scp node2:/etc/yum.repos.d/CentOS-Base.repo .
+[root@node2 ~]# scp node2:/etc/yum.repos.d/CentOS-Base.repo .
 ```
 
 **Command:**
 
 ```console
-[root@node2 ~]#scp node2:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
+[root@node2 ~]# scp node2:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
 ```
 
 Now install again:
@@ -684,7 +681,7 @@ Now install again:
 **Command:**
 
 ```console
-[root@node2 ~]#yum -y install ntp
+[root@node2 ~]# yum -y install ntp
 ```
 
 **Now configure the ntp file**
@@ -692,7 +689,7 @@ Now install again:
 **Command:**
 
 ```console
-[root@masternode ~]#vi /etc/ntp.conf
+[root@masternode ~]# vi /etc/ntp.conf
 ```
 
 Add server 10.0.0.2 which is our host machine.
@@ -704,7 +701,7 @@ Restart service
 **Command:**
 
 ```console
-[root@masternode ~]#service ntpd restart
+[root@masternode ~]# service ntpd restart
 ```
 
 Now check configuration
@@ -712,19 +709,19 @@ Now check configuration
 **Command:**
 
 ```console
-[root@masternode ~]#chkconfig -–level 35 ntpd on
+[root@masternode ~]# chkconfig -–level 35 ntpd on
 ```
 
 **Command:**
 
 ```console
-[root@masternode ~]#ntpq -p -n
+[root@masternode ~]# ntpq -p -n
 ```
 
 **Command:**
 
 ```console
-[root@masternode ~]#watch "ntpq -p -n"
+[root@masternode ~]# watch "ntpq -p -n"
 ```
 
 **Configure ntp on node1**
@@ -732,7 +729,7 @@ Now check configuration
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]#vi /etc/ntp.conf
+[root@node1 yum.repos.d]# vi /etc/ntp.conf
 ```
 
 Add server 10.0.0.2 which is our host machine.
@@ -744,26 +741,26 @@ Disable local server, fudge
 Now check configuration
 
 ```console
-[root@node1 yum.repos.d]#chkconfig -–level 35 ntpd on
+[root@node1 yum.repos.d]# chkconfig -–level 35 ntpd on
 ```
 Restart service
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]#service ntpd restart
+[root@node1 yum.repos.d]# service ntpd restart
 ```
 
 Checking on the host machine if ntp is configured on all nodes.
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]#ntpq -p -n
+[root@node1 yum.repos.d]# ntpq -p -n
 ```
 
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]#watch "ntpq -p -n";
+[root@node1 yum.repos.d]# watch "ntpq -p -n";
 ```
 
 **Now copy these configurations on node2**
@@ -771,13 +768,13 @@ Checking on the host machine if ntp is configured on all nodes.
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]#scp /etc/ntp.conf node2:/etc/ntp.conf
+[root@node1 yum.repos.d]# scp /etc/ntp.conf node2:/etc/ntp.conf
 ```
 
 **Command:**
 
 ```console
-[root@node2 ~]#chkconfig –level 35 ntpd on
+[root@node2 ~]# chkconfig –level 35 ntpd on
 ```
 
 Restart service
@@ -785,7 +782,7 @@ Restart service
 **Command:**
 
 ```console
-[root@node2 ~]#service ntpd restart
+[root@node2 ~]# service ntpd restart
 ```
 
 Checking on the host machine if ntp is configured on all nodes.
@@ -793,7 +790,7 @@ Checking on the host machine if ntp is configured on all nodes.
 **Command:**
 
 ```console
-[root@node1 yum.repos.d]#watch "ntpq -p -n"
+[root@node1 yum.repos.d]# watch "ntpq -p -n"
 ```
 
 ##
@@ -808,13 +805,13 @@ Check if pdsh is downloaded on the host machine or not.
 **Command:**
 
 ```console
-[root@hostmachine centos]#cd
+[root@hostmachine centos]# cd
 ```
 
 **Command:**
 
 ```console
-[root@hostmachine ~]#ls
+[root@hostmachine ~]# ls
 ```
 
 If it is not downloaded you can download it from the SourceForge website by typing pdsh on google search.
@@ -824,7 +821,7 @@ Now copy pdsh from masternode
 **Command:**
 
 ```console
-[root@masternode ~]#scp 10.0.0.2:/root/pdsh* .
+[root@masternode ~]# scp 10.0.0.2:/root/pdsh* .
 ```
 
 Type yes
@@ -838,7 +835,7 @@ Rebuild rpm
 **Command:**
 
 ```console
-[root@masternode ~]#rpmbuild –rebuild pdsh-2.18-1.src.rpm
+[root@masternode ~]# rpmbuild –rebuild pdsh-2.18-1.src.rpm
 ```
 
 This is not mandatory for all nodes other than masternode
@@ -848,13 +845,13 @@ Changing directory
 **Command:**
 
 ```console
-[root@masternode ~]#cd /usr/src/redhat/RPMS/i386/
+[root@masternode ~]# cd /usr/src/redhat/RPMS/i386/
 ```
 
 **Command:**
 
 ```console
-[root@masternode i386]#rpm -ivh pdsh-*
+[root@masternode i386]# rpm -ivh pdsh-*
 ```
 
 Now wait until it is debugging and installing
