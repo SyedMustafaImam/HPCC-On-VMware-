@@ -1,3 +1,5 @@
+<div align="right">
+
 #
 # **Parallel &amp; Distributed Computing**
 
@@ -21,9 +23,38 @@ Hirdesh Kumar (1812114)
 Elliott Francis Joseph (1812110)
 
 Date: 23-12-2021
+</div> 
 
 ---
+# Table of contents 
 
+- [**Parallel &amp; Distributed Computing**](#parallel--distributed-computing)
+- [**Final Project**](#final-project)
+  - [**Topic: HPC Clusters**](#topic-hpc-clusters)
+  - [**Project Report**](#project-report)
+- [Table of contents](#table-of-contents)
+  - [- **Benchmarking**](#--benchmarking)
+- [**1.Introduction**](#1introduction)
+- [**2.Use Cases**](#2use-cases)
+  - [**Research Labs**](#research-labs)
+  - [**Media And Entertainment**](#media-and-entertainment)
+  - [**Oil and gas**](#oil-and-gas)
+  - [**Artificial Intelligence**](#artificial-intelligence)
+  - [**Financial Services**](#financial-services)
+- [**3.Steps:**](#3steps)
+  - [**Creation Of Virtual Machines**](#creation-of-virtual-machines)
+  - [**Linux Installation on nodes**](#linux-installation-on-nodes)
+  - [**Configuring etc host file**](#configuring-etc-host-file)
+  - [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
+  - [**Setup NTP Service**](#setup-ntp-service)
+  - [**Installation of PDSH**](#installation-of-pdsh)
+  - [**Setup NFS**](#setup-nfs)
+  - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
+  - [**Installation of prerequisites packages (GCC, G77, etc)**](#installation-of-prerequisites-packages-gcc-g77-etc)
+  - [**Installation of MPI**](#installation-of-mpi)
+  - [**Compiling Linpack**](#compiling-linpack)
+  - [**Benchmarking**](#benchmarking)
+---
 
 # **1.Introduction**
 
@@ -173,7 +204,7 @@ Then reboot this system
 
 Now repeat the same process for Node2 as you have done for the Node1.
 
-# Configuring etc host file
+## **Configuring etc host file**
 
 **Command:** vi /etc/hosts
 
