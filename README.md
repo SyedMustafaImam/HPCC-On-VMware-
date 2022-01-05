@@ -1,19 +1,16 @@
-<div align="right">
+<p align="right">
+
 
 #
----
 # **Parallel &amp; Distributed Computing**
----
+
 #
----
 # **Final Project**
----
----
+
+
 ## **Topic: HPC Clusters**
----
----
+
 ## **Project Report**
----
 **Section: BSCS 7A**
 
 **By**
@@ -27,13 +24,18 @@ Hirdesh Kumar (1812114)
 Elliott Francis Joseph (1812110)
 
 Date: 23-12-2021
-</div> 
+</p> 
 
 
----
+
 # Table of contents 
----
 
+
+- [**Parallel &amp; Distributed Computing**](#parallel--distributed-computing)
+- [**Final Project**](#final-project)
+  - [**Topic: HPC Clusters**](#topic-hpc-clusters)
+  - [**Project Report**](#project-report)
+- [Table of contents](#table-of-contents)
 - [**1.Introduction**](#1introduction)
 - [**2.Use Cases**](#2use-cases)
   - [**Research Labs**](#research-labs)
