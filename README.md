@@ -1666,12 +1666,14 @@ Now run this using 2 nodes
 **Command:**
 
 ```console
-[mpiuser@masternode examples]$ mpiexec -n 2 ./icpi
+[mpiuser@masternode examples]$ mpiexec -n 1 ./icpi
 ```
 
 Enter the same number and see the execution time difference.
 
 On virtual machines, it might give higher time but in physical servers, it will be okay sometimes it gets problematic in VM&#39;s.
+
+
 ![Screenshot](./Pictures/differencebetweenoneandthreenodesprocessing.PNG)
 
 Remember real hardware clusters will give much accuracy and proficiency.
