@@ -1,10 +1,9 @@
 
 ---
 
-<<<<<<< HEAD
+
 <p style='color:#FAF9F6;font-size:32px; font-weight:bold'> Parallel &amp; Distributed Computing </p>
-=======
->>>>>>> fc0df95f2ad3783f3ac662ecf619b0b82eb04e40
+
 
 
 
@@ -60,9 +59,8 @@ Hirdesh Kumar (1812114)
 Elliott Francis Joseph (1812110)
 </p>
 
-
 </div> 
-=======
+
 <br />
 
 ---
@@ -75,8 +73,6 @@ Elliott Francis Joseph (1812110)
 Table of contents
 </p>
 
-- [<p style='color:#FAF9F6;font-size:32px; font-weight:bold'> Parallel &amp; Distributed Computing </p>](#-parallel--distributed-computing-)
-- [</div>](#div)
 - [**1.Introduction**](#1introduction)
 - [**2.Use Cases**](#2use-cases)
   - [**Research Labs**](#research-labs)
@@ -1774,12 +1770,12 @@ You can see complete passing and failing reports at the end of the benchmarking 
 
 Now execute hpl programe and send output to textfile
 
-<<<<<<< HEAD
+
 **Command:** 
 ```console
 mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
 ```
-=======
+
 **Command:** mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
 
 
@@ -1797,4 +1793,4 @@ mpiexec -n 2 ./Pictures/xhpl \&gt; performance.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
->>>>>>> fc0df95f2ad3783f3ac662ecf619b0b82eb04e40
+
