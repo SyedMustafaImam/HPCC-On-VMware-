@@ -86,7 +86,7 @@ Table of contents
 - [**Oil and gas**](#oil-and-gas)
 - [**Artificial Intelligence**](#artificial-intelligence)
 - [**Financial Services**](#financial-services)
-- [**3.Steps:**](#3steps)
+- [**3.Steps**](#3steps)
 - [**Creation Of Virtual Machines**](#creation-of-virtual-machines)
 - [**Linux Installation on nodes**](#linux-installation-on-nodes)
 - [**Configuring etc host file**](#configuring-etc-host-file)
@@ -151,9 +151,7 @@ HPC is used to track real-time stock trends and automate trading.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-# **3.Steps:**
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+# **3.Steps**
 
 #
 # **Creation Of Virtual Machines**
