@@ -1965,6 +1965,7 @@ Now execute hpl program
 ```
 
 ![ScreenShot](Pictures/benchmarkingStarted.png)
+
 This is our benchmarking being started. This might take some time.
 
 You can see complete passing and failing reports at the end of the benchmarking process.
@@ -1976,7 +1977,7 @@ Now execute hpl programe and send output to textfile
 **Command:**
 
 ```console
-[mpiuser@masternode Linux_PII_FBLAS_gm]# mpiexec -n 2 ./xhpl \&gt; performance.txt
+[mpiuser@masternode Linux_PII_FBLAS_gm]# mpiexec -n 2 ./xhpl > performance.txt
 ```
 
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
