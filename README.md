@@ -132,15 +132,15 @@ HPC is used to track real-time stock trends and automate trading.
 
 ## **Creation Of Virtual Machines**
 
-The master node is set up by the name &#39;HPC Master&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine and the network working on a bridge network. The System Configuration of the HPC Master is presented below:
+The master node is set up by the name &#39;HPC Master&#39; with CentOS-5 32 bit as the main OS of the Virtual Machine and the network working on a NAT. The System Configuration of the HPC Master is presented below:
 
 ![ScreenShot](./Pictures/master.JPG)
 
-The compute node is also created by the name &#39;node1&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine with a standard data store and a bridged network. The System Configuration of the HPCNode1 are presented below:
+The compute node is also created by the name &#39;node1&#39; with CentOS-5 32 bit as the main OS of the Virtual Machine with a standard data store and a NAT. The System Configuration of the HPCNode1 are presented below:
 
 ![ScreenShot](./Pictures/node1.JPG)
 
-Another compute node is also created by the name &#39;node2&#39; with Red Hat Enterprise Linux 32 bit as the main OS of the Virtual Machine with a standard data store and a bridged network. The System Configuration of the HPCNode2 are presented below:
+Another compute node is also created by the name &#39;node2&#39; with Centos-5 32 bit as the main OS of the Virtual Machine with a standard data store and a NAT. The System Configuration of the HPCNode2 are presented below:
 
 ![ScreenShot](./Pictures/node2.JPG)
 
