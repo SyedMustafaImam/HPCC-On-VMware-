@@ -65,7 +65,7 @@
 Table of contents
 </p>
 
-- [**1.Introduction**](#1introduction)
+- [**1.Introduction to HPC Cluster**](#1introduction-to-hpc-cluster)
 - [**2.Use Cases**](#2use-cases)
   - [**Research Labs**](#research-labs)
   - [**Media And Entertainment**](#media-and-entertainment)
@@ -86,15 +86,15 @@ Table of contents
   - [**Compiling Linpack**](#compiling-linpack)
   - [**Benchmarking**](#benchmarking)
 
-# **1.Introduction**
+# **1.Introduction to HPC Cluster**
 
-An HPC cluster is a collection of hundreds or thousands of servers that are networked together, each server is known as a node. Each node in a cluster works in parallel with each other, boosting processing speed to deliver high-performance computing. HPC is appropriate for most small and medium-sized businesses since these nodes are very close together, this is the reason why it is called a cluster. All cluster nodes have the same components as a laptop or desktop such as the CPU, cores, memory, and disk space. The difference between personal computers and a cluster node is in quantity, quality, and power of the components. User login to the cluster head node is done by using the ssh program.
+HPC Cluster is a collection of hundreds or thousands of servers that are networked together, each server is known as a node. Each node in a cluster works in parallel with each other, boosting processing speed to deliver high-performance computing. HPC is appropriate for most small and medium-sized businesses since these nodes are tightly, this is the reason why it is called a cluster. All cluster nodes have the same components as a laptop or desktop such as the CPU, cores, memory, and storage space. The difference between a personal computers and a cluster node is in quantity, quality, and power of the components. User login to the cluster head node is done by using the ssh program.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 # **2.Use Cases**
 
-An HPC is Deployed on-premises, at the edge, or in the cloud. HPC solutions are used for a variety of purposes across multiple industries.HPC is used to help scientists find sources of renewable energy, understand the evolution of our universe. Predict and track the storms, and create new materials.
+HPC is deployed on-premises, at the edge, or in the cloud. HPC solutions are used for a variety of purposes across multiple industries. HPC is used to help scientists find sources of renewable energy, understand the evolution of our universe. Predict and track the storms, and create new materials.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -106,19 +106,19 @@ HPC is used to help scientists find sources of renewable energy, understand the 
 
 ## **Media And Entertainment**
 
-HPC is used to edit feature films, render mind-blowing special effects, and stream live events around the world.
+HPC is used to edit feature films, render mind-blowing visual effects, and stream live events around the world.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## **Oil and gas**
 
-HPC is used to more accurately identify where to drill for new wells and to help boost production from existing wells.
+HPC is used to more accurately identify where to drill for new oil wells and to help boost production from existing oil wells.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## **Artificial Intelligence**
 
-HPC is used to detect credit card fraud, provide self-guided technical support, reach self-driving vehicles, and improve cancer screening techniques.
+HPC is used to detect credit card fraud, provide self-guided technical support, self-driving vehicles, and improve cancer screening techniques.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -152,7 +152,7 @@ An NTP server was also created by using a node that is not part computation perf
 
 ## **Linux Installation on nodes**
 
-After booting up from the image it will automatically go into the install mode.
+After booting up from the image it will automatically go into the install node.
 
 Once it asks for input, press skip for skipping the media check.
 
@@ -160,7 +160,7 @@ Create a custom layout then add a partition with file type **swap** and size of 
 
 Repeat the process one more time to create another partition with **ext3** file type and size of **128MB** and additional size options as **fixed to maximum allowable size** , then press ok.
 
-Once we have a disk that is all you need. Just press Next then again next. It&#39;s going to have the hostname manually as the **master node,** then press edit above and uncheck **Enable IPv6 support** change dynamic IP to manual IP as **10.0.0.20** and prefix/netmask as **255.255.255.0** then press okay then press next then again next then continue as We don&#39;t want any gateway no DNS and let&#39;s specify our timezone, press next, again Press Next.
+Once we have a disk that is all you need. It&#39;s going to have the hostname manually entered as the **master node,** then press edit above and uncheck **Enable IPv6 support**. Change dynamic IP to manual IP as **192.168.174.142** and prefix/netmask as **255.255.255.0** then press okay then press next then again next then continue as We don&#39;t want any gateway no DNS and let&#39;s specify our timezone, so press next.
 
 Specify the password as red hat then press next.
 
@@ -225,7 +225,7 @@ As you can see you have four files there. Now we will copy this VMDK file from h
 **Command:**
 
 ```console
-[root@hostmachine HPCMaster]# cp HPCMaster.vmdk ../Pictures/HPCNode1/HPCNode1.vmdk
+[root@hostmachine HPCMaster]# cp HPCMaster.vmdk ../HPCNode1/HPCNode1.vmdk
 ```
 
 Press y for yes overwriting.
