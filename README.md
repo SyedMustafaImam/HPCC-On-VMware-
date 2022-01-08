@@ -155,7 +155,7 @@ An NTP server was also created by using a node that is not part computation perf
 
 ## **Linux Installation on nodes**
 
-You can download the iso image of CentOS 5.2 here[https://archive.org/details/cent-os-5.2-i-386-bin-dvd].
+You can download the iso image of CentOS 5.2 here(https://archive.org/details/cent-os-5.2-i-386-bin-dvd).
 
 After booting up from the image it will automatically go into the install node.
 
