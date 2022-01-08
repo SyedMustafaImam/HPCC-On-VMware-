@@ -78,6 +78,9 @@ Table of contents
   - [**Configuring etc host file**](#configuring-etc-host-file)
   - [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
   - [**Setup NTP Service**](#setup-ntp-service)
+          - [#Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board](#use-servers-from-the-ntp-pool-project-approved-by-ubuntu-technical-board)
+          - [#on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for](#on-2011-02-08-lp-104525-see-httpwwwpoolntporgjoinhtml-for)
+          - [#more information.](#more-information)
   - [**Installation of PDSH**](#installation-of-pdsh)
   - [**Setup NFS**](#setup-nfs)
   - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
@@ -132,25 +135,27 @@ HPC is used to track real-time stock trends and automate trading.
 
 ## **Creation Of Virtual Machines**
 
-The master node is set up by the name &#39;HPC Master&#39; with CentOS-5 32 bit as the main OS of the Virtual Machine and the network working on a NAT. The System Configuration of the HPC Master is presented below:
+The master node is set up by the name &#39;HPC Master&#39; with CentOS-5 32 bit as the main OS of the Virtual Machine and the network working on a NAT. The system configuration of our HPC masternode is presented below:
 
 ![ScreenShot](./Pictures/master.JPG)
 
-The compute node is also created by the name &#39;node1&#39; with CentOS-5 32 bit as the main OS of the Virtual Machine with a standard data store and a NAT. The System Configuration of the HPCNode1 are presented below:
+The compute node is also created by the name &#39;node1&#39; with CentOS-5 32 bit as the main OS of the Virtual Machine with a standard data store and a NAT. The system configuration of the node1 are presented below:
 
 ![ScreenShot](./Pictures/node1.JPG)
 
-Another compute node is also created by the name &#39;node2&#39; with Centos-5 32 bit as the main OS of the Virtual Machine with a standard data store and a NAT. The System Configuration of the HPCNode2 are presented below:
+Another compute node is also created by the name &#39;node2&#39; with Centos-5 32 bit as the main OS of the Virtual Machine with a standard data store and a NAT. The system configuration of the node2 are presented below:
 
 ![ScreenShot](./Pictures/node2.JPG)
 
-An NTP server was also created by using a node that is not part computation performed by a cluster. It was done by using Ubuntu OS 64 bit as the main OS of the Virtual Machine with a standard data store and a NAT network. System Configurations are presented below:
+An NTP server was also created by using a node that is not part computation performed by a cluster. It was done by using Ubuntu OS 64 bit as the main OS of the Virtual Machine with a standard data store and a NAT network. System configurations are presented below:
 
 ![ScreenShot](./Pictures/ntp.JPG)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## **Linux Installation on nodes**
+
+You can download the iso image of CentOS 5.2 here[https://archive.org/details/cent-os-5.2-i-386-bin-dvd].
 
 After booting up from the image it will automatically go into the install node.
 
@@ -162,9 +167,9 @@ Repeat the process one more time to create another partition with **ext3** file 
 
 Once we have a disk that is all you need. It&#39;s going to have the hostname manually entered as the **master node,** then press edit above and uncheck **Enable IPv6 support**. Change dynamic IP to manual IP as **192.168.174.142** and prefix/netmask as **255.255.255.0** then press okay then press next then again next then continue as We don&#39;t want any gateway no DNS and let&#39;s specify our timezone, so press next.
 
-Specify the password as red hat then press next.
+Specify the password as abc.123 then press next.
 
-Uncheck desktop and Just click customize now. And now select packages from here. We don&#39;t want a desktop. We want **editors** , **development libraries, and development tools** I won&#39;t have to use. Go to the base system. uncheck **dial network support**.
+Uncheck desktop and just click customize now by select packages from the options. We don&#39;t requir a desktop. We want **editors** , **development libraries, and development tools**. Go to the base system, uncheck **dial network support**.
 
 So that is all you will need right now. so just go to next. Press Next to start the installation and so on, we will be done.
 
@@ -172,9 +177,13 @@ Once the system is completely installed, select reboot.
 
 Remember that your nodes in your HPC cluster should be of the same hardware, same processor architecture, and the same version of the operating system you&#39;re using.
 
-Let your system boot up. So this is how you would install Linux.
+Let your system boot up. So this is how you would install CentOS 5.
 
-On a virtual machine now we&#39;ve two more nodes to go on which we need to install the Linux operating system. Once I&#39;m happy with the configuration of the system, we will copy the files from the backend. This is because we have here this version of VMware server that does not support cloning. So what we will be doing is shutting down this server/system/VM, and now copying its file disk file. As your server is turned off, let&#39;s go to the backend.
+On a virtual machine now we&#39;ve two more nodes to go on which we need to install the Linux operating system. Once we&#39; have our desired configurations of the system, we will copy the files from the backend. This is because we have VMware Workstaion Pro 16 that does not support cloning. So what we will be doing is shutting down this server/system/VM, and now copying its file disk file. As your server is turned off, let&#39;s go to the backend.
+
+We have used Ubuntu as for our NTP server. You can use any distribution of Linux or Windows version for this task. After powering the Ubuntu virtual machine, select an language of your understand and press Install Ubuntu Button. Select an keyboard layout, after this choose normal installation then select earse disk and install Ubuntu option. Select an timezone and setup login credentials. Press continue and wait for the installation to complete. 
+
+From our hostmachine console we modify the folders of Virtual Machines files.
 
 **Command:**
 
@@ -184,40 +193,41 @@ On a virtual machine now we&#39;ve two more nodes to go on which we need to inst
 
 **Command:**
 
+
 ```console
 [root@hostmachine machines]# ls
 ```
 
-And we have this HPC master directory, which we have these files.
+And we have this HPC masternode directory, which we have these files.
 
-Let&#39;s enter into this directory by
+Let&#39;s enter into this directory by,
 
 **Command:**
 
 ```console
-[root@hostmachine machines]# cd HPCMaster
+[root@hostmachine machines]# cd masternode
 ```
 
 **Command:**
 
 ```console
-[root@hostmachine HPCMaster]# ls
+[root@hostmachine masternode]# ls
 ```
 
 **Command:**
 
 ```console
-[root@hostmachine HPCMaster]# ls -lh
+[root@hostmachine masternode]# ls -lh
 ```
 
-As you can see, this is your virtual machine disk file named **HPCMaster.vmdk** , which consumes 1.6 GB.
+As you can see, this is your virtual machine disk file named **masternode.vmdk** .
 
-So now I&#39;m copying this file.
+So now we&#39;ll copying this file.
 
 **Command:**
 
 ```console
-[root@hostmachine HPCMaster]# ls -lh ../HPCNode1/
+[root@hostmachine masternode]# ls -lh ../node1/
 ```
 
 As you can see you have four files there. Now we will copy this VMDK file from here and overwrite this VMDK file here.
@@ -225,7 +235,7 @@ As you can see you have four files there. Now we will copy this VMDK file from h
 **Command:**
 
 ```console
-[root@hostmachine HPCMaster]# cp HPCMaster.vmdk ../HPCNode1/HPCNode1.vmdk
+[root@hostmachine masternode]# cp masternode.vmdk ../node1/node1.vmdk
 ```
 
 Press y for yes overwriting.
@@ -235,12 +245,12 @@ As you can see the file is copied so let&#39;s check the list.
 **Command:**
 
 ```console
-[root@hostmachine HPCMaster]# ls ../HPCNode1/ -lh
+[root@hostmachine masternode]# ls ../node1/ -lh
 ```
 
-Let&#39;s try starting node1 and see what happens. Click power on and go to the console window and let it boot up. It will have all settings from your HPC master. That means it will also have the same hostname, same IP everything.
+Let&#39;s try starting node1 and see what happens. Click power on and go to the console window and let it boot up. It will have all settings from your masternode. That means it will also have the same hostname, same IP everything.
 
-Once this is booted up. So let&#39;s go to the console, it will seem like a master node, but it is not it is, as you can see here, this is **HPCNode1** and in the same way, we&#39;ll do the second node as well. But first, adjust the hostnames.
+Once this is booted up. So let&#39;s go to the console, it will seem like a master node, but it is not it is, as you can see here, this is **node1** and in the same way, we&#39;ll do the **node2** as well. But first, adjust the hostnames.
 
 **Command:**
 
@@ -248,9 +258,7 @@ Once this is booted up. So let&#39;s go to the console, it will seem like a mast
 [root@masternode ~]# vi /etc/sysconfig/network
 ```
 
-Then edit hostname as **Node1**
-
-And the IP is going to be
+Then edit hostname as **node1** and the IP is going to be.
 
 **Command:**
 
@@ -258,7 +266,7 @@ And the IP is going to be
 [root@masternode ~]# vi /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
 
-Life config Ethernet zero should not get its IP from DHCP. It&#39;s going to be a static IP address equal to 10.0.0.11 and netmask is equal to 255.255.255.0
+First Ethernet network interface card or NIC in the system should not get its IP from DHCP. It&#39;s going to be a static IP address equal to 192.168.174.143 and netmask is equal to 255.255.255.0
 
 One more thing to see hosts.
 
@@ -268,7 +276,7 @@ One more thing to see hosts.
 [root@masternode ~]# vi /etc/hosts
 ```
 
-remove this master node at all from the script.
+Remove this master node at all from the script.
 
 Now let&#39;s change the hostname manually.
 
@@ -290,11 +298,11 @@ Now let&#39;s change the hostname manually.
 [root@masternode ~]# less /var/log/messages
 ```
 
-That will make sure that the logs in the various log messages are written correctly.
+It will make sure that the logs in the various log messages are written correctly.
 
-Press **shift G** you can see as soon as you&#39;ve restarted Syslog the logs here it says node1 now before it was master node.
+Press **shift G** you can see as soon as you&#39;ve restarted syslog the logs here it says node1 now before it was masternode.
 
-Then reboot this system
+Then reboot this system.
 
 **Command:**
 
@@ -302,7 +310,7 @@ Then reboot this system
 [root@masternode ~]# reboot
 ```
 
-Now repeat the same process for Node2 as you have done for the Node1.
+Now repeat the same process for node2 as you have done for the node1.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -314,19 +322,19 @@ Now repeat the same process for Node2 as you have done for the Node1.
 [root@masternode ~]# vi /etc/hosts
 ```
 
-Now delete IP version 6 naming file
+Now delete IP version 6 naming file.
 
-Then remove a master node from this localhost line
+Then remove a masternode from this localhost line.
 
 Add three lines here
 
-10.0.0.20 master node
+192.168.174.142 masternode
 
-10.0.0.11 node1
+192.168.174.143 node1
 
-10.0.0.12 node2
+192.168.174.145 node2
 
-Then back to the console.
+Then save the these changes and return to the console.
 
 **Command:**
 
@@ -334,9 +342,9 @@ Then back to the console.
 [root@masternode ~]# scp /etc/hosts node1:/etc/ 
 ```
 
-Except for the fingerprint of node1, node1&#39;s password is redhat.
+Except for the fingerprint of node1, node1&#39;s password is abc.123.
 
-Do the same thing for node2
+Do the same thing for node2.
 
 **Command:**
 
@@ -344,7 +352,7 @@ Do the same thing for node2
 [root@masternode ~]# scp /etc/hosts node2:/etc/
 ```
 
-Except for the fingerprint of node2, node2&#39;s password is redhat.
+Except for the fingerprint of node2, node2&#39;s password is abc.123.
 
 Now, the, etc hosts file is configured.
 
@@ -354,7 +362,7 @@ Now, the, etc hosts file is configured.
 
 Now we will generate public and private keys (DSA and RSA) of all nodes.
 
-Generate dsa keys
+Generate DSA keys.
 
 **Command:**
 
@@ -364,7 +372,7 @@ Generate dsa keys
 
 Just press enter, no need to enter a passphrase.
 
-Now generate the rsa keys
+Now generate the RSA keys.
 
 **Command:**
 
@@ -374,7 +382,7 @@ Now generate the rsa keys
 
 Just press enter, no need to enter a passphrase.
 
-Now if you want you can check these keys
+Now if you want you can check these keys.
 
 **Command:**
 
@@ -388,7 +396,7 @@ Now if you want you can check these keys
 [root@masternode .ssh]# ls -l
 ```
 
-As you can see both dsa and rsa are visible along with the public and private keys.
+As you can see both DSA and RSA are visible along with the public and private keys.
 
 Now copy all four key files for this directory
 
@@ -476,7 +484,7 @@ You see this file. This file is a valid one, but it does not exist by default. N
 [root@masternode ~]# ssh-keyscan -t rsa masternode node1 node2 >> /etc/ssh/ssh_known_hosts
 ```
 
-Now see how the file looks like
+Now see how the file looks like,
 
 **Command:**
 
@@ -562,17 +570,202 @@ Now replicate this file to all nodes.
 
 ## **Setup NTP Service**
 
-**Setupping NTP service on node1.**
+**Setup NTP in Ubuntu**
+
+Update our local repository
 
 **Command:**
 
 ```console
-[root@node1 ~]# vi /etc/ntp.conf
+[root@linux ~]# apt-get update
 ```
 
-Disable server 0, server 1, server 2
+Install NTP server daemon.
 
-Disable server local-clock and fudge
+**Command:**
+
+```console
+[root@linux ~]# apt-get install ntp
+```
+
+Switch to an NTP server pool closest to your location
+
+
+**Command:**
+
+```console
+[root@linux ~]# vi /etc/ntp.conf
+```
+In this file, you will be able to see a pool list.
+
+
+###### #Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board
+###### #on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for
+###### #more information.
+
+Add the following lines if not added automatically.
+
+pool 0.ubuntu.pool.ntp.org iburst
+pool 1.ubuntu.pool.ntp.org iburst
+pool 2.ubuntu.pool.ntp.org iburst
+pool 3.ubuntu.pool.ntp.org iburst
+
+Exit the file.
+
+Restart the NTP server.
+
+**Command:**
+
+```console
+[root@linux ~]# service ntp restart
+```
+
+Check NTP server status.
+
+**Command:**
+
+```console
+[root@linux ~]# service ntp status
+```
+
+Configure Firewall to allow nodes access to NTP server
+
+**Command:**
+
+```console
+[root@linux ~]# ufw allow from any to any port 123 proto udp
+```
+
+
+**Command:**
+
+```console
+[root@linux ~]# ip a
+```
+The IP address of Ubuntu is 192.168.174.131, so NTP server IP would be same.
+
+**Install NTP service on masternode.**
+
+
+**Command:**
+```console
+[root@masternode ~]# rpm –-import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+```
+
+**Command:**
+
+```console
+[root@masternode ~]# yum -y install ntp
+```
+
+**Command:**
+
+```console
+[root@masternode ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo .
+```
+
+**Command:**
+
+```console
+[root@masternode ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
+```
+
+**Install NTP service on node2.**
+
+
+**Command:**
+
+```console
+[root@node2 ~]# rpm –-import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+```
+
+**Command:**
+
+```console
+[root@node2 ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
+```
+
+**Command:**
+
+```console
+[root@node2 ~]# yum -y install ntp
+```
+
+**Install NTP service on node1.**
+
+
+**Command:**
+
+```console
+[root@nodeq ~]# rpm –-import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+```
+
+**Command:**
+
+```console
+[root@node1 ~]# yum -y install ntp
+```
+
+**Configuration **
+
+
+**NTP configuration masternode,node1,node2.**
+
+**Command:**
+
+```console
+[root@masternode ~]# vi /etc/ntp.conf
+```
+Add server 192.168.174.131 which is our host machine.
+
+Comment server 0, server 1, server 2
+
+Comment server local-clock and fudge
+
+Exit the file
+
+
+
+
+**Command:**
+
+```console
+[root@masternode ~]# chkconfig --level 35 ntpd on
+```
+
+
+Restart service
+
+**Command:**
+
+```console
+[root@masternode ~]# service ntpd restart
+```
+
+**Command:**
+
+```console
+[root@masternode ~]# ntpq -p -n
+```
+
+**Command:**
+
+```console
+[root@masternode ~]# watch "ntpq -p -n"
+```
+
+**Command:**
+
+```console
+[root@masternode ~]# scp /etc/ntp.conf node1:/etc/ntp.conf
+```
+
+**Command:**
+
+```console
+[root@node1 ~]# chkconfig --level 35 ntpd on
+```
+
 
 Restart service
 
@@ -588,53 +781,26 @@ Restart service
 [root@node1 ~]# ntpq -p -n
 ```
 
-Now copy rpm for centos
-
 **Command:**
 
 ```console
-[root@node1 ~]# rpm –-import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+[root@node1 ~]# watch "ntpq -p -n"
 ```
 
 **Command:**
 
 ```console
-[root@node1 ~]# yum -y install ntp
+[root@node1 ~]# scp /etc/ntp.conf node2:/etc/ntp.conf
 ```
 
-As the file is not copied so we will copy it again
+
 
 **Command:**
 
 ```console
-[root@node1 ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo .
+[root@node2 ~]# chkconfig --level 35 ntpd on
 ```
 
-**Command:**
-
-```console
-[root@node1 ~]# scp node1:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
-```
-
-Now install again:
-
-**Command:**
-
-```console
-[root@masternode ~]# yum -y install ntp
-```
-
-**Setupping ntp service on node2.**
-
-**Command:**
-
-```console
-[root@node2 ~]# vi /etc/ntp.conf
-```
-
-Disable server 0, server 1, server 2
-
-Disable server local-clock and fudge
 
 Restart service
 
@@ -650,149 +816,11 @@ Restart service
 [root@node2 ~]# ntpq -p -n
 ```
 
-Now copy rpm for centos
-
 **Command:**
 
-```console
-[root@node2 ~]# rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
-```
-
-**Command:**
 
 ```console
-[root@node2 ~]# yum -y install ntp
-```
-
-As the file is not copied so we will copy it again
-
-**Command:**
-
-```console
-[root@node2 ~]# scp node2:/etc/yum.repos.d/CentOS-Base.repo .
-```
-
-**Command:**
-
-```console
-[root@node2 ~]# scp node2:/etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/
-```
-
-Now install again:
-
-**Command:**
-
-```console
-[root@node2 ~]# yum -y install ntp
-```
-
-**Now configure the ntp file**
-
-**Command:**
-
-```console
-[root@masternode ~]# vi /etc/ntp.conf
-```
-
-Add server 10.0.0.2 which is our host machine.
-
-Disable server 0, sever1, server2
-
-Restart service
-
-**Command:**
-
-```console
-[root@masternode ~]# service ntpd restart
-```
-
-Now check configuration
-
-**Command:**
-
-```console
-[root@masternode ~]# chkconfig -–level 35 ntpd on
-```
-
-**Command:**
-
-```console
-[root@masternode ~]# ntpq -p -n
-```
-
-**Command:**
-
-```console
-[root@masternode ~]# watch "ntpq -p -n"
-```
-
-**Configure ntp on node1**
-
-**Command:**
-
-```console
-[root@node1 yum.repos.d]# vi /etc/ntp.conf
-```
-
-Add server 10.0.0.2 which is our host machine.
-
-Disable server 0, sever1, server2
-
-Disable local server, fudge
-
-Now check configuration
-
-```console
-[root@node1 yum.repos.d]# chkconfig -–level 35 ntpd on
-```
-Restart service
-**Command:**
-
-```console
-[root@node1 yum.repos.d]# service ntpd restart
-```
-
-Checking on the host machine if ntp is configured on all nodes.
-**Command:**
-
-```console
-[root@node1 yum.repos.d]# ntpq -p -n
-```
-
-**Command:**
-
-```console
-[root@node1 yum.repos.d]# watch "ntpq -p -n";
-```
-
-**Now copy these configurations on node2**
-
-**Command:**
-
-```console
-[root@node1 yum.repos.d]# scp /etc/ntp.conf node2:/etc/ntp.conf
-```
-
-**Command:**
-
-```console
-[root@node2 ~]# chkconfig –level 35 ntpd on
-```
-
-Restart service
-
-**Command:**
-
-```console
-[root@node2 ~]# service ntpd restart
-```
-
-Checking on the host machine if ntp is configured on all nodes.
-
-**Command:**
-
-```console
-[root@node1 yum.repos.d]# watch "ntpq -p -n"
+[root@node2 ~]# watch "ntpq -p -n"
 ```
 
 ##
@@ -806,13 +834,13 @@ Check if pdsh is downloaded on the host machine or not.
 **Command:**
 
 ```console
-[root@hostmachine centos]# cd
+[root@linux linux]# cd
 ```
 
 **Command:**
 
 ```console
-[root@hostmachine ~]# ls
+[root@linux ~]# ls
 ```
 
 If it is not downloaded you can download it from the SourceForge website by typing pdsh on google search.
@@ -822,14 +850,14 @@ Now copy pdsh from masternode
 **Command:**
 
 ```console
-[root@masternode ~]# scp 10.0.0.2:/root/pdsh* .
+[root@masternode ~]# scp 192.168.174.131:/root/pdsh* .
 ```
 
 Type yes
 
-Enter the password which is red hat,
+Enter the password which is abc.123,
+
 PDSH is now copied.
-It&#39;s copied.
 
 Rebuild rpm
 
@@ -1001,6 +1029,8 @@ Add this line
 ```console
 masternode:/cluster /cluster  nfs defaults  0 0
 ```
+Kindly disable firewall in masternode,node1 and node2.
+
 **Now specify etc/fstab on node2**
 
 **Command:**
