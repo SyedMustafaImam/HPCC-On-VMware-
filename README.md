@@ -78,9 +78,6 @@ Table of contents
   - [**Configuring etc host file**](#configuring-etc-host-file)
   - [**SSH equivalence establishment for user root**](#ssh-equivalence-establishment-for-user-root)
   - [**Setup NTP Service**](#setup-ntp-service)
-    - [**Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board**](#use-servers-from-the-ntp-pool-project-approved-by-ubuntu-technical-board)
-    - [**on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for**](#on-2011-02-08-lp-104525-see-httpwwwpoolntporgjoinhtml-for)
-    - [**more information.**](#more-information)
   - [**Installation of PDSH**](#installation-of-pdsh)
   - [**Setup NFS**](#setup-nfs)
   - [**Creation of ordinary user and also setup SSH equivalence**](#creation-of-ordinary-user-and-also-setup-ssh-equivalence)
@@ -599,9 +596,8 @@ Switch to an NTP server pool closest to your location
 In this file, you will be able to see a pool list.
 
 
-   ### **Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board**
-   ### **on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for**
-   ### **more information.**
+**Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board
+on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for more information.**
 
 Add the following lines if not added automatically.
 
