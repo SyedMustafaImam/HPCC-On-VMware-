@@ -702,7 +702,7 @@ The IP address of Ubuntu is 192.168.174.131, so NTP server IP would be same.
 [root@node1 ~]# yum -y install ntp
 ```
 
-**Configuration **
+**Configuration**
 
 
 **NTP configuration masternode,node1,node2.**
