@@ -182,6 +182,8 @@ We have used Ubuntu as for our NTP server. You can use any distribution of Linux
 
 From our hostmachine console we modify the folders of Virtual Machines files.
 
+You can download the nodes here:https://drive.google.com/drive/folders/1P3KzqFtmWejV8prhWgSvIFon_LInhR_g?usp=sharing
+
 **Command:**
 
 ```console
